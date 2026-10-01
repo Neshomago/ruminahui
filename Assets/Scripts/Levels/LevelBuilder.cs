@@ -29,6 +29,7 @@ namespace Ruminahui
                 case MissionDatabase.BootScene: BuildBoot(); break;
                 case "M0.1": BuildNightRaid(); break;
                 case "M5.5": BuildSigchos(); break;
+                case "M2.2": BuildConvoy(); break;
                 case "M5.6": BuildStoneFace(); break;
                 case "Test_PumaDummy": case "M0.2": BuildDummyYard(contentId); break;
                 case "M1.1": BuildDummyYard(contentId, withChaska: true); break;

@@ -27,6 +27,7 @@ namespace Ruminahui
             PartyManager.Instance?.ClearMembers();
             AllyCommandSystem.Instance?.ResetCooldowns();
             StealthSystem.Instance?.ClearScene();
+            EscortHud.Clear();
             if (DialogueRunner.Shared != null) { DialogueRunner.Shared.Stop(); DialogueRunner.Shared.AnnouncePrompts = true; }
 
             if (Current != null)
@@ -59,7 +60,7 @@ namespace Ruminahui
             var next = MissionDatabase.Next(Current.Id);
             Debug.Log($"[Mission] {Current.Id} complete → {(next != null ? next.Id : "end of campaign")}");
             Progression.MarkCompleted(Current.Id);
-            if (Current.AwardsUpgradePoint) ObjectiveTracker.Say("Upgrades", $"+1 upgrade point ({UpgradeEconomy.AvailablePoints()} available — Esc ▸ Upgrades)");
+            if (Current.AwardsUpgradePoint && !Current.QuietCompletion) ObjectiveTracker.Say("Upgrades", $"+1 upgrade point ({UpgradeEconomy.AvailablePoints()} available — Esc ▸ Upgrades)");
             if (SaveSystem.Instance != null) SaveSystem.Instance.Save(next != null ? next.Id : Current.Id);
             StartMission(next != null ? next.Id : MissionDatabase.BootScene);
         }

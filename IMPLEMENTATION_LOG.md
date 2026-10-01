@@ -170,3 +170,14 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
   - **M5.5:** the same framing (no attacks). Open ground *or* being spotted brings scouts in from both sides, then "…No.", then **STAND / RUN** with the caption "Neither choice changes what happens next. Only how." STAND = upright capture; RUN = 3 s of running, then brought down.
   - **M5.6:** a wide, still interior shot; the hard cut to black on his line; **STAY SILENT** ×3 spaced by 6 s of stillness; the Interpreter's offer; the execution ground with the camera on his face; the wind cue, then a cut before anything happens. Combat UI is hidden throughout. Nothing violent is shown (04 production notes).
 - **Assumptions:** being spotted in M0.1 = a quiet retry from the last cover patch (04 writes no fail state). The village NPC lines are marked placeholders (04 doesn't write them). Raiders/scouts are non-combat watchers.
+
+### 2026-10-01 · Batch C — escort system, M2.2 · M5.2 · M2.3
+- **Docs:** 02 M2.2 ("protect a convoy"), M5.2 ("escort/evacuation under time pressure… 'light the fire'… should not make this feel good"), M2.3 ("scripted, uninteractive loss… at the worst moment"); approved UI U3.
+- **Files:** `Systems/Escort/{EscortTarget,EscortHud}.cs`, `UI/EscortPanelUI.cs`, `Missions/{EscortMissionBase,ConvoyDirector,HardestOrderDirector,WillkaLastStandDirector,NpcFollower}.cs`, `Levels/LevelBuilder.Escort.cs` (replaces the old M2.3/M5.2 builders), `MissionDatabase.QuietCompletion`; `Tests/EditMode/EscortAndMissionTests.cs`.
+- **What:**
+  - **Escorts:** Player-faction CombatTargets that enemies attack; they follow a path and *halt* while an enemy is within 7 m.
+  - **Fail and retry:** an escort lost, the player down, or the M5.2 timer → quick retry from the last ambush checkpoint (escorts reset, enemies cleared, the ambush restarts).
+  - **M2.2:** the review (talk to Atahualpa), then a 2-cart convoy with two ambushes triggered by the lead cart's progress.
+  - **M5.2:** 3 family groups to the north gate in 150 s with 2 firing lines, then "Light the fire" (hold 2.5 s). A long, quiet hold and a slow ember-dark fade; no "+1 point" message (the point is still awarded).
+  - **M2.3:** harder ambush (×1.3 damage). Mid-final-wave (8 s in, or below 50% HP) control is taken away, the fight slows to a near-stop, Willka steps in and falls, fade out.
+- **Assumptions:** "deal with collaborators" (M5.2) isn't built (no spec). M2.2/M2.3/M5.2 lines are marked placeholders (not in 04).

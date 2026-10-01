@@ -67,25 +67,6 @@ namespace Ruminahui
             ObjectiveTracker.Set("M2.1 Garrison Duty — three sub-encounters. Armored shields need a FULLY charged heavy (or two).");
         }
 
-        // M2.3 — the ambush that kills Willka: Highland Scouts, hard encounter, then a scripted uninteractive loss (placeholder).
-        static void BuildWillkaAmbush()
-        {
-            Ground(new Vector3(0f, 0f, 30f), new Vector2(12f, 80f));
-            Block("CliffL", new Vector3(-7f, 4f, 30f), new Vector3(2f, 8f, 80f), RockColor);
-            Block("CliffR", new Vector3(7f, 4f, 30f), new Vector3(2f, 8f, 80f), RockColor);
-            Spawn(CharacterId.Ruminahui, Vector3.zero, 0f, true);
-            var e = Encounter("Pass ambush", new Vector3(0f, 0f, 25f), 0f, 0f,
-                W("Hidden", S(EnemyType.HighlandScout, -3f, 0f), S(EnemyType.HighlandScout, 3f, 6f), S(EnemyType.HighlandScout, -2f, 12f)),
-                W("Pinned", S(EnemyType.ShieldBearer, 0f, 10f), S(EnemyType.Skirmisher, -3f, 16f), S(EnemyType.Skirmisher, 3f, 16f)));
-            e.Begin();
-            e.Completed += () =>
-            {
-                ObjectiveTracker.Set("[Scripted, uninteractive] Willka's last stand — cutscene placeholder.");
-                ObjectiveTracker.Say("Willka", "[M2.3 death scene — dialogue not yet written]");
-                ExitZone(new Vector3(0f, 0f, 60f), "M2.3");
-            };
-            ObjectiveTracker.Set("M2.3 — listen: a snapped-branch sound comes a beat before each ambush.");
-        }
 
         // M3.1 — large battle; Chaska fights as an AI ally with her own kit.
         static void BuildOpeningMoves()
@@ -203,25 +184,6 @@ namespace Ruminahui
                 if (b is SpanishInfantry si && si.formation == null) group.Add(si);
         }
 
-        // M5.2 — arquebusiers punish standing still (escort/evacuation objectives not built yet).
-        static void BuildHardestOrder()
-        {
-            Ground(new Vector3(0f, 0f, 25f), new Vector2(60f, 70f));
-            for (int i = 0; i < 6; i++) Block("House", new Vector3(i % 2 == 0 ? -12f : 12f, 2f, 8f + i * 7f), new Vector3(6f, 4f, 5f), WoodColor);
-            Spawn(CharacterId.Ruminahui, Vector3.zero, 0f, true);
-            PlaceHuaca(new Vector3(-4f, 0f, -3f), 90f);
-            var e = Encounter("Quito streets", new Vector3(0f, 0f, 25f), 0f, 0f,
-                W("Firing line", S(EnemyType.Arquebusier, -6f, 12f), S(EnemyType.Arquebusier, 6f, 12f), S(EnemyType.SpanishInfantry, 0f, 0f)),
-                W("Second line", S(EnemyType.Arquebusier, 0f, 16f), S(EnemyType.SpanishInfantry, -3f, 2f), S(EnemyType.SpanishInfantry, 3f, 2f)));
-            e.WaveStarted += w => GroupInfantry();
-            e.Begin();
-            e.Completed += () =>
-            {
-                ObjectiveTracker.Set("[Scripted] 'Light the fire' beat — placeholder. Walk to the light.");
-                ExitZone(new Vector3(0f, 0f, 55f), "M5.2");
-            };
-            ObjectiveTracker.Set("M5.2 — yellow flare = the shot is coming. Blocking won't save you; dodge through it or close the gap.");
-        }
 
         // M5.4 — guerrilla ambushes with limited healing; officer mini-boss; Chaska/Atoc as AI allies.
         static void BuildLongRetreat()

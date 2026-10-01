@@ -36,6 +36,7 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 23. A feature gate ("combat disabled") goes around the gated code only, never as an early `return` above shared logic (interaction, movement).
 24. Anything that must read during cinematics or black screens (subtitles, prompts) lives above the fader, outside the HUD group.
 25. Stubs used by logic tests need REAL implementations (math), or the tests pass vacuously.
+26. Disabling a MonoBehaviour does NOT stop its coroutines. To freeze actors, use `TimeDilation`, `StopAllCoroutines`, or deactivate the GameObject.
 
 ---
 
@@ -175,3 +176,7 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 ### L-027 · caught · Dummy math in stubs makes geometry tests meaningless
 - `Vector3.Angle`/`Distance` returned 0 in the stubs, so a sight-cone test would have "passed" for any input.
 - **Fix:** real `Vector2`/`Vector3` math in `Tools/CompileCheck/Stubs/UnityEngine.Math.cs`. **Rule:** #25.
+
+### L-028 · caught (review) · `enabled = false` doesn't stop coroutines
+- M2.3's "the fight freezes" beat disabled every `EnemyBrain`, but their behaviour coroutines (wind-ups, strikes) keep running on a disabled component.
+- **Fix:** `TimeDilation.StartSlow(0.05, …, exempt Rumiñahui)` for the beat, `StopSlow()` after. **Rule:** #26.

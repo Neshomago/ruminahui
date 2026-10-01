@@ -13,6 +13,8 @@ namespace Ruminahui
         public bool HasBuiltContent; // false → placeholder scene with a "complete mission" zone
         /// <summary>Completing it earns 1 upgrade point (approved economy: combat missions only).</summary>
         public bool AwardsUpgradePoint => CombatMissions.Contains(Id);
+        /// <summary>02 M5.2: "the game should not make this feel good to do" — no "+1 point" fanfare (the point is still awarded).</summary>
+        public bool QuietCompletion => Id == "M5.2" || Id == "M5.6";
 
         // Missions whose 02 gameplay notes include combat (M4.2's optional gauntlet counts).
         static readonly System.Collections.Generic.HashSet<string> CombatMissions = new System.Collections.Generic.HashSet<string>
@@ -39,7 +41,7 @@ namespace Ruminahui
             new MissionDefinition("M1.3", "What Discipline Buys", 1, "Rumiñahui (18)", true),
             new MissionDefinition("M1.4", "Leaving the Forest", 1, "Rumiñahui"),
             new MissionDefinition("M2.1", "Garrison Duty", 2, "Rumiñahui", true),
-            new MissionDefinition("M2.2", "The Prince Notices", 2, "Rumiñahui"),
+            new MissionDefinition("M2.2", "The Prince Notices", 2, "Rumiñahui", true),
             new MissionDefinition("M2.3", "Willka's Last Stand", 2, "Rumiñahui", true),
             new MissionDefinition("M2.4", "The Empire Splits", 2, "Rumiñahui"),
             new MissionDefinition("M3.1", "Opening Moves", 3, "Rumiñahui (+Chaska AI)", true),

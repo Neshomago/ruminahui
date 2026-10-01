@@ -42,6 +42,7 @@ namespace Ruminahui
             Add<CallInStripUI>(HudLayer);
             Add<StealthMeterUI>(HudLayer);
             Add<BossBarUI>(HudLayer);
+            Add<EscortPanelUI>(HudLayer);
             Add<ContextPromptUI>(HudLayer);
             Add<SwapSelectorUI>(HudLayer);
             // Overlays (always on top)
