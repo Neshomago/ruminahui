@@ -5,7 +5,7 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
 
 - Every script's header says which doc/section it implements (`// Implements: …`).
 - Every invented number is tagged `// PLACEHOLDER-BALANCE:` in code. Find them all with `grep -rn "PLACEHOLDER-BALANCE" Assets/Scripts`.
-- Status of this whole pass: **written, not yet compiled** (no Unity editor was available). The first compile is the next step.
+- Status: **compiles offline against Unity API stubs (0 errors, 0 warnings); 19/19 logic tests pass** (`Tools/CompileCheck/check.sh`). The riskiest package APIs were checked against real source (LESSONS L-010/L-012/L-018). Not yet opened in Unity.
 
 ---
 
@@ -126,3 +126,9 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
 
 ### 2026-09-30 · Tests
 - **Files:** `Assets/Tests/EditMode/*`: resources, unlock schedule and mission order, AbilitySlot free-use, Atoc phase thresholds.
+
+### 2026-09-30 · Offline compile harness (Unity not installed)
+- **Why:** Unity couldn't be installed; this verifies the code without it.
+- **Files:** `Tools/CompileCheck/*` (outside `Assets/`, so Unity ignores it).
+- **What:** .NET Standard 2.1 build against hand-written stubs for UnityEngine, uGUI, Input System, Cinemachine 3, Addressables, URP, UnityEditor and NUnit, plus a reflection test runner. Result: one real error found and fixed (LESSONS L-017). Cinemachine/URP/Addressables members checked against their public sources: one URP setup gap (L-012) and one Cinemachine `LookAt` gotcha (L-010) fixed.
+- **Limit:** stubs reflect our understanding of the API, so a pass isn't proof for Unity APIs that haven't been verified.

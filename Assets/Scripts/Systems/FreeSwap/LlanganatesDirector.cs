@@ -63,7 +63,7 @@ namespace Ruminahui
             yield return WaitFor(lineAnchor);
 
             Stage("[D] The Narrow Dark — Atoc: trap-sense reveals the deadfalls; disarm them");
-            foreach (var t in narrowDarkTraps) yield return WaitFor(t);
+            foreach (var trap in narrowDarkTraps) yield return WaitFor(trap);
 
             Stage("[E] Regroup at the inner approach (bring everyone)");
             regroupZone.armed = true;

@@ -1,5 +1,11 @@
 # Unity Setup & Testing
 
+## 0. Without Unity: offline check
+```bash
+Tools/CompileCheck/check.sh
+```
+Compiles everything against Unity API stubs and runs the logic tests (needs only the .NET SDK). See `Tools/CompileCheck/README.md`.
+
 ## 1. Open the project (Unity 6 LTS)
 1. Unity Hub → **Add → Add project from disk** → select this `ruminahui` folder (the one containing `Assets/` and `Packages/`).
 2. Open it with **Unity 6 LTS (6000.0.x)**. The first import downloads the packages in `Packages/manifest.json` (URP, Cinemachine 3, Input System, Addressables, Timeline, Test Framework).

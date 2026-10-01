@@ -1,7 +1,9 @@
 # Lessons Learned — Rumiñahui Unity build
 
 **Read this before every build step.** Each entry is a mistake (made, or caught before it shipped) plus the rule that prevents it.
-Status: **caught** = found in review before compiling · **hit** = confirmed by a Unity compile/run · **verify** = a risk to check at the first compile.
+Status: **caught** = found in review · **hit** = found by a compiler (Unity or the offline `Tools/CompileCheck`) · **verified** = checked against real package source · **verify** = still to check in Unity.
+
+**Offline check:** run `Tools/CompileCheck/check.sh` after every change, even without Unity installed.
 
 When Unity reports an error: find it here first. If it's new, add an entry (ID, symptom, cause, fix, rule).
 
@@ -23,6 +25,8 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 12. `Reset()` only runs in the editor. Runtime builders must set every field explicitly.
 13. Event-based stage gates must be armed or polled: an event that fires before anyone subscribes is lost. Prefer polling a `fired` flag.
 14. Check each mission's resource economy: a Focus-gated verb in a no-combat mission is a softlock.
+15. Run `Tools/CompileCheck/check.sh` before every commit. New Unity APIs go into the stubs with their REAL signatures.
+16. C# forbids reusing a local name (`t`, `i`…) in a nested scope of the same method. Inside coroutines give loop variables descriptive names.
 
 ---
 
@@ -74,7 +78,7 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 - **Fix:** `SceneSetup.Start` makes its own scene active before building.
 - **Rule:** #10.
 
-### L-010 · verify · Cinemachine 3 API names (doc 11 uses Cinemachine 2 names)
+### L-010 · verified (2026-09-30, against com.unity.cinemachine main source) · Cinemachine 3 API names (doc 11 uses Cinemachine 2 names)
 | Doc (CM2) | Code (CM3, Unity 6) |
 |---|---|
 | `CinemachineVirtualCamera` | `CinemachineCamera` |
@@ -83,14 +87,17 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 | `CinemachineCollider` | `CinemachineDeoccluder` (`MinimumDistanceFromTarget`) |
 | `m_Priority` (int) | `Priority` (`PrioritySettings`, assigned from int via implicit conversion) |
 | namespace `Cinemachine` | namespace `Unity.Cinemachine`, asmdef `Unity.Cinemachine` |
-- **Verify at first compile:** the `Priority = int` assignment, `Deoccluder.MinimumDistanceFromTarget`, and `ThirdPersonFollow.CameraSide/VerticalArmLength`.
+- **Verified in source:** `PrioritySettings` struct with implicit `int` conversions both ways · `CinemachineCamera.Lens` (field, `LensSettings.FieldOfView` float) · abstract `Follow`/`LookAt` · `ThirdPersonFollow.{Damping, ShoulderOffset, VerticalArmLength, CameraSide, CameraDistance}` · `RotationComposer.{Composition.ScreenPosition, Damping (Vector2), TargetOffset}` · `Deoccluder.MinimumDistanceFromTarget` (class is `#if CINEMACHINE_PHYSICS`, so it needs the physics module, which the manifest has) · `CinemachineBlendDefinition(Styles, float)` struct with `Styles.Cut/EaseInOut` · `CinemachineBrain.DefaultBlend` field.
+- **Gotcha found:** the `LookAt` setter always sets `Target.CustomLookAtTarget = true`, *even for null*. Fixed: `CharacterCameraSet` only assigns non-null targets.
 
 ### L-011 · verify · Package versions in `Packages/manifest.json`
 - URP (`17.0.x`) is locked to the editor version. If Unity complains, let the Package Manager pick the version that ships with your Unity 6 patch.
 - Input System: when Unity asks to enable the new input backend and restart, say **Yes** (or set Player ▸ Active Input Handling = *Input System Package* or *Both*).
 
-### L-012 · verify · URP asset created from code
-- `UniversalRenderPipelineAsset.Create(rendererData)` with a code-made `UniversalRendererData`. If post-processing data is missing (pink materials or post-processing warnings), create a URP asset from *Assets ▸ Create ▸ Rendering ▸ URP Asset (with Universal Renderer)* and assign it in Graphics + Quality settings.
+### L-012 · verified + fixed · URP asset created from code
+- **Cause (confirmed in URP source):** URP's own menu builds the renderer through an internal `CreateRendererData`, which sets `rendererData.postProcessData = PostProcessData.GetDefaultPostProcessData()` (internal, editor-only, loads `Packages/com.unity.render-pipelines.universal/Runtime/Data/PostProcessData.asset`). A bare `CreateInstance<UniversalRendererData>()` skips that.
+- **Fix:** `RuminahuiSetupMenu` loads that asset path itself and assigns the public field `postProcessData`. `Create(rendererData)`, `renderScale`, `supportsHDR` and `shadowDistance` are all public with setters (verified).
+- **Still verify in Unity:** no pink materials after step 1. Fallback: *Assets ▸ Create ▸ Rendering ▸ URP Asset (with Universal Renderer)*.
 
 ### L-013 · caught · BSD sed on macOS
 - `sed -E 's/\bX/…/'` silently matched nothing (BSD sed has no `\b`).
@@ -109,3 +116,11 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 - **Symptom (would be):** M5.3 softlock at the Wide Break (Vantage Leap costs 15 Focus; the mission has no combat).
 - **Fix:** `CombatKit.IsTraversalAbility`: Vantage Leap is free when no enemy is within 25 m.
 - **Rule:** #14.
+
+### L-017 · hit (offline compiler) · Duplicate local name in one method
+- **Error:** `CS0136: A local named 't' cannot be declared in this scope` in `LlanganatesDirector.Run` (`foreach (var t …)` and later `float t`).
+- **Fix:** renamed the loop variable to `trap`.
+- **Rule:** #16. This was the only compile error in about 9,800 lines; the first-pass review missed it, the offline compiler caught it.
+
+### L-018 · verified · Addressables editor API
+- `AddressableAssetSettings.SetDirty(ModificationEvent, object, bool postEvent, bool settingsModified = false)`, `DefaultGroup` and `ModificationEvent.EntryMoved` all exist as used (checked against package source).

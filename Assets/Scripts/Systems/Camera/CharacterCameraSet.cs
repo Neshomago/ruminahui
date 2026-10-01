@@ -50,7 +50,8 @@ namespace Ruminahui
             go.transform.position = transform.position - transform.forward * normalDistance + Vector3.up * 2f;
             var cam = go.AddComponent<CinemachineCamera>();
             cam.Follow = CameraTarget;
-            cam.LookAt = lockOnCam ? null : CameraTarget;
+            // CM3: setting LookAt (even to null) flags a custom look-at target; only set it when we have one.
+            if (!lockOnCam) cam.LookAt = CameraTarget;
             cam.Priority = InactivePriority;
             cam.Lens.FieldOfView = 55f;
 
@@ -88,7 +89,7 @@ namespace Ruminahui
         {
             lockTarget = target;
             lockedOn = target != null;
-            LockOn.LookAt = target;
+            if (target != null) LockOn.LookAt = target;
             ApplyPriorities();
         }
 

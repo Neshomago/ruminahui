@@ -23,6 +23,7 @@ namespace Ruminahui.EditorTools
         const string PrefabFolder = "Assets/Prefabs/Placeholder";
         const string MaterialPath = "Assets/Resources/Placeholder/PlaceholderLit.mat";
         const string RegistryPath = "Assets/Resources/PrefabRegistry.asset";
+        const string DefaultPostProcessDataPath = "Packages/com.unity.render-pipelines.universal/Runtime/Data/PostProcessData.asset";
 
         // ───────────────────────── 1. Configure project ─────────────────────────
         [MenuItem("Rumiñahui/1. Configure Project (URP, material, registry)", priority = 1)]
@@ -48,6 +49,11 @@ namespace Ruminahui.EditorTools
             }
 
             var rendererData = ScriptableObject.CreateInstance<UniversalRendererData>();
+            // URP's own "Create URP Asset" does this via an internal helper (PostProcessData.GetDefaultPostProcessData);
+            // without it the renderer has no post-processing data (LESSONS_LEARNED L-012).
+            rendererData.postProcessData = AssetDatabase.LoadAssetAtPath<PostProcessData>(DefaultPostProcessDataPath);
+            if (rendererData.postProcessData == null)
+                Debug.LogWarning($"[Rumiñahui] Default PostProcessData not found at {DefaultPostProcessDataPath} — post-processing will be off until you assign one on URP_Renderer.");
             AssetDatabase.CreateAsset(rendererData, SettingsFolder + "/URP_Renderer.asset");
 
             var standard = UniversalRenderPipelineAsset.Create(rendererData);
