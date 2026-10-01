@@ -12,5 +12,7 @@ for p in Runtime EditorAndTests; do
   echo "== Compile: $p"
   "$DOTNET" build "$p.csproj" --no-incremental -v q -nologo 2>&1 | grep -E "error|Error\(s\)|Warning\(s\)" || true
 done
+echo "== Dialogue data in sync with docs/04-dialogue-script.md"
+python3 ../DialogueImport/import_dialogue.py --check
 echo "== Run EditMode logic tests"
 "$DOTNET" run --project TestRunner.csproj -v q 2>&1 | grep -E "PASS|FAIL|passed" 

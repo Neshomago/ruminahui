@@ -192,6 +192,13 @@ namespace Ruminahui
             Spawn(who, Vector3.zero, 0f, true);
             ExitZone(new Vector3(0f, 0f, 20f), title);
             ObjectiveTracker.Set($"PLACEHOLDER {title} ({(m != null ? m.PlaysAs : "")}). Content not built yet — walk to the light to continue.");
+            PlayMissionDialogue(id);
+        }
+
+        /// <summary>04-dialogue-script.md: missions with a written script play it (placeholder playback, see DialogueRunner).</summary>
+        static void PlayMissionDialogue(string id)
+        {
+            if (DialogueDatabase.Has(id)) DialogueRunner.PlayMission(id, dynamic.gameObject);
         }
     }
 }

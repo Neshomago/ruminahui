@@ -4,7 +4,9 @@
 ```bash
 Tools/CompileCheck/check.sh
 ```
-Compiles everything against Unity API stubs and runs the logic tests (needs only the .NET SDK). See `Tools/CompileCheck/README.md`.
+Compiles everything against Unity API stubs, checks the dialogue JSON is in sync with `docs/04-dialogue-script.md`, and runs the logic tests (needs the .NET SDK + python3). See `Tools/CompileCheck/README.md`.
+
+After editing the dialogue doc: `python3 Tools/DialogueImport/import_dialogue.py`.
 
 ## 1. Open the project (Unity 6 LTS)
 1. Unity Hub → **Add → Add project from disk** → select this `ruminahui` folder (the one containing `Assets/` and `Packages/`).
@@ -22,6 +24,7 @@ Open any scene and press **Play**. `_Boot` opens the mission/test list (Esc also
 
 | Scene | What to try |
 |---|---|
+| `M0.1`, `M0.2`, `M5.5`, `M5.6`, `M5.7` | Their dialogue from doc 04 plays line by line in the hint panel (top-right); stage directions go to the Console |
 | `Tests/Test_PumaDummy` | Light chain, charged heavy (hold RMB), block (Q), **parry** the middle dummy (tap Q just before its orange flash ends), dodge, Earthbreaker (R) |
 | `Tests/Test_EarlyEncounter` | Break shields with heavies; shields lower (cyan flash) after 2-3 blocked hits; slingers kite you |
 | `Tests/Test_Kuntur` | Tab to mark, RMB bolas then light = finisher, R Vantage Leap onto blue pads, jump + LMB Falling Star, F Sky-Cut, V slow time |

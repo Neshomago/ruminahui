@@ -132,3 +132,10 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
 - **Files:** `Tools/CompileCheck/*` (outside `Assets/`, so Unity ignores it).
 - **What:** .NET Standard 2.1 build against hand-written stubs for UnityEngine, uGUI, Input System, Cinemachine 3, Addressables, URP, UnityEditor and NUnit, plus a reflection test runner. Result: one real error found and fixed (LESSONS L-017). Cinemachine/URP/Addressables members checked against their public sources: one URP setup gap (L-012) and one Cinemachine `LookAt` gotcha (L-010) fixed.
 - **Limit:** stubs reflect our understanding of the API, so a pass isn't proof for Unity APIs that haven't been verified.
+
+### 2026-09-30 · Dialogue script as data
+- **Doc:** 04-dialogue-script.md (M0.1, M0.2, M5.5, M5.6, M5.7). AI_BUILD_PROMPT: "use 04 … later as text data sources".
+- **Files:** `Tools/DialogueImport/import_dialogue.py`, `Assets/Resources/Dialogue/M0_1…M5_7.json` (generated), `Systems/Dialogue/{DialogueData,DialogueDatabase,DialogueRunner}.cs`, `LevelBuilder` (plays a mission's script at scene start), `Tests/EditMode/DialogueTests.cs`.
+- **What:** the doc is the source of truth. The importer turns it into JSON (scenes → beats: line / action / gameplay / qte / textcard, with stable ids like `M5.6.2.05` and prompt labels extracted from notes: `WARN HIM`, `STAND`/`RUN`, `STAY SILENT`). `--check` fails if the JSON is stale, and `check.sh` runs it. All 31 spoken lines are present. Playback is a placeholder: lines go through `ObjectiveTracker.Say` (shown in the existing hint panel), stage directions go to the Console, prompts are announced "not built yet". `DialogueRunner.BeatPlayed` is the hook for the future subtitle UI / VO.
+- **Assumptions:** line duration = 0.8 s + 0.055 s/char, clamped to 2-7 s (PLACEHOLDER-BALANCE). Speaker names are title-cased from the doc's caps (`RUMIÑAHUI` → `Rumiñahui`). No new UI (subtitles still deferred; they'll need an approved UI plan).
+- **Workflow:** edit `docs/04-dialogue-script.md` → `python3 Tools/DialogueImport/import_dialogue.py` → commit doc + JSON together.

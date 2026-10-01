@@ -1,0 +1,144 @@
+{
+  "missionId": "M5.6",
+  "docTitle": "STONE FACE",
+  "subtitle": "",
+  "scenes": [
+    {
+      "heading": "INT. SPANISH HOLDING QUARTERS, NEAR QUITO — DAY(S) LATER",
+      "beats": [
+        {
+          "id": "M5.6.1.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Sparse, functional space. RUMIÑAHUI, injured, sits bound. A Spanish OFFICER (unnamed — deliberately kept generic per the story's choice not to build out individual Spanish characters) speaks through/with a QUECHUA-SPEAKING INTERPRETER.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.1.02",
+          "kind": "line",
+          "speaker": "Interpreter",
+          "direction": "relaying, not translating word-for-word",
+          "text": "He wants to know where the gold went. Atahualpa's gold. He says it will go easier for you if you simply say it.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.1.03",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "(Rumiñahui says nothing. His face is entirely still.)",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.1.04",
+          "kind": "line",
+          "speaker": "Interpreter",
+          "direction": "after a silence, quieter, almost apologetic",
+          "text": "He is going to hurt you. I think you understand that.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.1.05",
+          "kind": "line",
+          "speaker": "Rumiñahui",
+          "direction": "the only line he speaks in the scene, evenly",
+          "text": "Tell him my mother named me for the mountains. Tell him I already know what stone feels like.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.1.06",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "the sequence that follows is deliberately NOT depicted directly. Hard cut to black on the line above. What the player experiences instead:",
+          "prompts": []
+        }
+      ]
+    },
+    {
+      "heading": "INT. HOLDING QUARTERS — LATER (TIME UNSPECIFIED)",
+      "beats": [
+        {
+          "id": "M5.6.2.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Return from black. Rumiñahui is alone, worse for it — visibly, but the camera stays wide and still; no close-up dwelling on injury. His breathing is heavy. His face, even now, is unreadable.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.2.02",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "a short, slow sequence — the only interaction is a repeated, quiet prompt: \"STAY SILENT.\" It appears three times across the scene, spaced by stretches of stillness. There is no fail state; the prompt exists to give the player somewhere to put their hands, not to test them.",
+          "prompts": [
+            "STAY SILENT"
+          ]
+        },
+        {
+          "id": "M5.6.2.03",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "After the third prompt, the Interpreter returns, alone this time.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.2.04",
+          "kind": "line",
+          "speaker": "Interpreter",
+          "direction": "quiet, no longer performing anything for anyone",
+          "text": "You could still tell me. Only me. I could tell them anything I wanted to.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.2.05",
+          "kind": "line",
+          "speaker": "Rumiñahui",
+          "direction": "a long beat — then, almost gently",
+          "text": "Then you'd be the one carrying it. I've carried enough for other people. Let this one be mine to keep.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.2.06",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "(The Interpreter has no answer to that. He leaves.)",
+          "prompts": []
+        }
+      ]
+    },
+    {
+      "heading": "EXT. EXECUTION GROUND, NEAR QUITO — DAY — JUNE 1535",
+      "beats": [
+        {
+          "id": "M5.6.3.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "A plain, unglorified space. No crowd shot for spectacle — a handful of Spanish soldiers, the Interpreter at a distance, watching, unable to do anything else.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.3.02",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Rumiñahui is brought forward. The camera holds on his face — the same stillness from the training post as a boy, the same stillness from the fireside with Willka.",
+          "prompts": []
+        },
+        {
+          "id": "M5.6.3.03",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "No final speech. No last-second rescue. The scene cuts on the sound of wind through the highlands — the same sound design cue used in the Prologue's opening — before anything happens on screen, ending the mission on an implication rather than an image.",
+          "prompts": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "missionId": "M0.2",
+  "docTitle": "THE NAME THEY GAVE HIM",
+  "subtitle": "",
+  "scenes": [
+    {
+      "heading": "EXT. FOREST CLEARING — DAWN, DAYS LATER",
+      "beats": [
+        {
+          "id": "M0.2.1.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Smoke still rises faintly in the distance. WILLKA, 60s, kneels beside Pillahuaso, who sits wrapped in a blanket, staring at nothing.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.1.02",
+          "kind": "line",
+          "speaker": "Willka",
+          "direction": "",
+          "text": "You've a name?",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.1.03",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "(No answer.)",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.1.04",
+          "kind": "line",
+          "speaker": "Willka",
+          "direction": "not pushing",
+          "text": "Fine. Keep it, then. Come on — up. Sitting in the dirt won't feed you and it won't bring anyone back.",
+          "prompts": []
+        }
+      ]
+    },
+    {
+      "heading": "MONTAGE — SEVERAL WEEKS.",
+      "beats": [
+        {
+          "id": "M0.2.2.01",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "a series of short vignettes, lightly interactive — chopping wood, carrying water, first training-dummy strikes. Each vignette is brief, 30–90 seconds, stitched with time-skip transitions.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.2.02",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "In one vignette, other camp children mock Pillahuaso for not speaking. He says nothing — his face doesn't move at all, even as they push him. One boy, embarrassed by the lack of a reaction, backs off first.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.2.03",
+          "kind": "line",
+          "speaker": "Camp Boy",
+          "direction": "to another kid, muttering as they walk off",
+          "text": "His face doesn't do anything. Like a rock.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.2.04",
+          "kind": "line",
+          "speaker": "Camp Boy 2",
+          "direction": "half-laughing",
+          "text": "Rumi... ñawi. Stone-face.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.2.05",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "The name spreads through the camp within days, half mockery, half something closer to respect. We see Pillahuaso hear it for the first time, alone, practicing strikes against a post.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.2.06",
+          "kind": "line",
+          "speaker": "Pillahuaso",
+          "direction": "quiet, to himself, testing it",
+          "text": "Rumiñahui.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.2.07",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "He doesn't smile. But he doesn't correct the next person who says it, either.",
+          "prompts": []
+        }
+      ]
+    },
+    {
+      "heading": "EXT. TRAINING GROUND — LATER",
+      "beats": [
+        {
+          "id": "M0.2.3.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Willka watches him drill, arms crossed.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.02",
+          "kind": "line",
+          "speaker": "Willka",
+          "direction": "",
+          "text": "You know why I don't call you by the name your mother gave you anymore?",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.03",
+          "kind": "line",
+          "speaker": "Rumiñahui",
+          "direction": "still drilling",
+          "text": "Because you're old and forget things.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.04",
+          "kind": "line",
+          "speaker": "Willka",
+          "direction": "dry",
+          "text": "Because you stopped answering to it. A name is worth what a person is willing to be, boy. You decided what you're willing to be a long time before I had any say in it.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.05",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "(Beat. Rumiñahui stops drilling.)",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.06",
+          "kind": "line",
+          "speaker": "Rumiñahui",
+          "direction": "",
+          "text": "I froze.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.07",
+          "kind": "line",
+          "speaker": "Willka",
+          "direction": "",
+          "text": "You did.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.08",
+          "kind": "line",
+          "speaker": "Rumiñahui",
+          "direction": "flat",
+          "text": "I won't again.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.09",
+          "kind": "line",
+          "speaker": "Willka",
+          "direction": "quietly",
+          "text": "I know. That's rather the problem with you, if I'm honest. But — later's problem. Again. From the top.",
+          "prompts": []
+        },
+        {
+          "id": "M0.2.3.10",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "full combat tutorial resumes — light/heavy attack, dodge, block, taught over the remainder of the mission. Ends on the accepted name and the first real training bout, setting up M1.1.",
+          "prompts": []
+        }
+      ]
+    }
+  ]
+}

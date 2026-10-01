@@ -1,0 +1,163 @@
+{
+  "missionId": "M0.1",
+  "docTitle": "NIGHT RAID",
+  "subtitle": "",
+  "scenes": [
+    {
+      "heading": "EXT. PÍLLARO VILLAGE — NIGHT",
+      "beats": [
+        {
+          "id": "M0.1.1.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "A small highland settlement at the forest's edge. Terraced fields above, cook-fires below. PILLAHUASO, 10, sits at the edge of a fire, half-listening to his mother, INTI CHASKA (a local princess, not the same character as adult Chaska), speaking with an elder about the harvest. His older cousin/foster-brother-figure, ANTA (20s, a village warrior who has effectively raised him alongside his mother), sharpens a blade nearby.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.1.02",
+          "kind": "line",
+          "speaker": "Anta",
+          "direction": "to Pillahuaso, not looking up",
+          "text": "You're staring at the fire like it owes you something.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.1.03",
+          "kind": "line",
+          "speaker": "Pillahuaso",
+          "direction": "",
+          "text": "I'm not staring at anything.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.1.04",
+          "kind": "line",
+          "speaker": "Anta",
+          "direction": "a small smile",
+          "text": "Good. Then go find more wood before your mother notices you haven't.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.1.05",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "brief free-roam of the village — light interactions with 2–3 NPCs, establishing the community before it's taken away. No combat.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.1.06",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Pillahuaso crosses the village. A dog barks — wrong pitch, wrong urgency. Torches appear on the ridge above. A horn sounds, not one of theirs.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.1.07",
+          "kind": "line",
+          "speaker": "Elder",
+          "direction": "distant, shouting",
+          "text": "To the terraces! Get the children to the terraces!",
+          "prompts": []
+        }
+      ]
+    },
+    {
+      "heading": "RAID BEGINS.",
+      "beats": [
+        {
+          "id": "M0.1.2.01",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "forced-stealth sequence. The player, as the boy, must move from cover to cover toward the designated safe point. No fight prompts exist for Pillahuaso — the UI deliberately shows no attack option, only move/hide.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.02",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Anta moves past Pillahuaso toward the fighting, shoving him toward a low stone wall.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.03",
+          "kind": "line",
+          "speaker": "Anta",
+          "direction": "",
+          "text": "Stay down. Stay here. I mean it.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.04",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Pillahuaso obeys — for a moment. Through gaps in the wall, we see Anta engage two raiders, holding a narrow path alone. He's good. He's also outnumbered.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.05",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "A THIRD RAIDER approaches Anta's blind side. The game gives the player one prompt:",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.06",
+          "kind": "qte",
+          "speaker": "",
+          "direction": "",
+          "text": "\"WARN HIM\" — a single button prompt, deliberately generous timing window",
+          "prompts": [
+            "WARN HIM"
+          ]
+        },
+        {
+          "id": "M0.1.2.07",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "If the player succeeds: Anta still takes the hit — the QTE was never winnable, only the follow-through mattered. If the player fails or does nothing: same outcome, slightly faster. Either way—",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.08",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "Anta falls.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.09",
+          "kind": "line",
+          "speaker": "Pillahuaso",
+          "direction": "barely audible",
+          "text": "No—",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.10",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "He doesn't move. He wants to. His legs won't. The raiders pass within feet of him and don't see him — he is, for the first time, made invisible by his own fear, and it saves his life and costs him everything else.",
+          "prompts": []
+        },
+        {
+          "id": "M0.1.2.11",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "Gameplay ends here — hard cut, no further interaction this mission.",
+          "prompts": []
+        }
+      ]
+    }
+  ]
+}

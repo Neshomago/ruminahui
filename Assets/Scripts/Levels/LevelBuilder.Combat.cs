@@ -22,6 +22,7 @@ namespace Ruminahui
             // d2 swings on a telegraph — practise Stone Parry (Q just before the hit) and Root-Step.
 
             if (id != "Test_PumaDummy") ExitZone(new Vector3(0f, 0f, 22f), id);
+            PlayMissionDialogue(id); // M0.2 has a script in 04
             ObjectiveTracker.Set(optional
                 ? "M4.2 — optional: vent on the dummies, or walk to the light to skip."
                 : "Training: middle dummy swings (orange flash = tell). Parry with Q right before the hit; heavy = hold RMB.");

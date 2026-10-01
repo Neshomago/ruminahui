@@ -1,0 +1,71 @@
+{
+  "missionId": "M5.5",
+  "docTitle": "SIGCHOS",
+  "subtitle": "",
+  "scenes": [
+    {
+      "heading": "EXT. HIGHLAND TRAIL, NEAR SIGCHOS — DAY, EARLY 1535",
+      "beats": [
+        {
+          "id": "M5.5.1.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "RUMIÑAHUI, gaunt, older, moving alone through thin cover — Chaska and Atoc are elsewhere on this leg of the guerrilla campaign (established via brief dialogue at mission start; the split is deliberate, isolating him for what's coming).",
+          "prompts": []
+        },
+        {
+          "id": "M5.5.1.02",
+          "kind": "line",
+          "speaker": "Rumiñahui",
+          "direction": "to himself, checking a ridge line",
+          "text": "Two days to the meeting point. Less, if the pass is clear.",
+          "prompts": []
+        },
+        {
+          "id": "M5.5.1.03",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "this mission mirrors M0.1's structure precisely — movement/stealth only, no attack prompts available, framed identically in UI to the Prologue so experienced players feel the echo immediately.",
+          "prompts": []
+        },
+        {
+          "id": "M5.5.1.04",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "He crosses open ground he shouldn't have. Spanish scouts — more than expected — close from two directions. This time, unlike the Prologue, he sees them coming.",
+          "prompts": []
+        },
+        {
+          "id": "M5.5.1.05",
+          "kind": "line",
+          "speaker": "Rumiñahui",
+          "direction": "low, almost calm",
+          "text": "...No.",
+          "prompts": []
+        },
+        {
+          "id": "M5.5.1.06",
+          "kind": "qte",
+          "speaker": "",
+          "direction": "",
+          "text": "QTE-style choice, framed honestly in the UI as unwinnable — no amount of input changes the outcome, only the manner of it: \"STAND\" or \"RUN.\" Either choice leads to capture; \"STAND\" gives a slightly different, more dignified capture animation.",
+          "prompts": [
+            "STAND",
+            "RUN"
+          ]
+        },
+        {
+          "id": "M5.5.1.07",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "He's taken. No dialogue as it happens — just the sound design and his face, which, true to the name, does not change.",
+          "prompts": []
+        }
+      ]
+    }
+  ]
+}

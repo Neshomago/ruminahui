@@ -1,0 +1,105 @@
+{
+  "missionId": "M5.7",
+  "docTitle": "WHAT THE MOUNTAINS KEEP",
+  "subtitle": "EPILOGUE",
+  "scenes": [
+    {
+      "heading": "EXT. LLANGANATES MOUNTAINS — SOME WEEKS LATER",
+      "beats": [
+        {
+          "id": "M5.7.1.01",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "CHASKA, alone, climbs a ridge line. ATOC waits at the top, looking out over the valley toward a distant, smoke-thinned Quito.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.02",
+          "kind": "line",
+          "speaker": "Atoc",
+          "direction": "",
+          "text": "You didn't need to come all the way up here to tell me.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.03",
+          "kind": "line",
+          "speaker": "Chaska",
+          "direction": "",
+          "text": "I didn't come to tell you. You already knew before I got here. I came because I didn't want to hear it alone.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.04",
+          "kind": "action",
+          "speaker": "",
+          "direction": "",
+          "text": "(A long silence. Wind. Atoc looks back toward the mountains behind them — the hidden treasure's direction, never shown directly on screen even now.)",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.05",
+          "kind": "line",
+          "speaker": "Atoc",
+          "direction": "quiet",
+          "text": "Three of us knew where that gold went. Now it's two.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.06",
+          "kind": "line",
+          "speaker": "Chaska",
+          "direction": "",
+          "text": "Then it stays two. However long that takes.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.07",
+          "kind": "line",
+          "speaker": "Atoc",
+          "direction": "almost a dry laugh, no real humor in it",
+          "text": "He'd have liked that. Something of his that even they can't touch.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.08",
+          "kind": "line",
+          "speaker": "Chaska",
+          "direction": "looking at the mountains, not at Atoc",
+          "text": "He'd have liked a lot of things he didn't get.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.1.09",
+          "kind": "gameplay",
+          "speaker": "",
+          "direction": "",
+          "text": "final short walking sequence — the player, as Chaska, walks the ridge alongside Atoc toward the tree line, no combat, no further dialogue prompts. They disappear into the trees together.",
+          "prompts": []
+        }
+      ]
+    },
+    {
+      "heading": "TEXT CARD (closing the game)",
+      "beats": [
+        {
+          "id": "M5.7.2.01",
+          "kind": "textcard",
+          "speaker": "",
+          "direction": "",
+          "text": "Rumiñahui was executed in June 1535, having never revealed the location of Atahualpa's treasure.",
+          "prompts": []
+        },
+        {
+          "id": "M5.7.2.02",
+          "kind": "textcard",
+          "speaker": "",
+          "direction": "",
+          "text": "To this day, the gold of the Inca has never been found in the Llanganates — and people are still looking.",
+          "prompts": []
+        }
+      ]
+    }
+  ]
+}

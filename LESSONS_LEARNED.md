@@ -26,6 +26,9 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 13. Event-based stage gates must be armed or polled: an event that fires before anyone subscribes is lost. Prefer polling a `fired` flag.
 14. Check each mission's resource economy: a Focus-gated verb in a no-combat mission is a softlock.
 15. Run `Tools/CompileCheck/check.sh` before every commit. New Unity APIs go into the stubs with their REAL signatures.
+17. Generated data (dialogue JSON) is never hand-edited. Change the source doc, re-run the importer; `check.sh` fails on drift.
+18. Don't put dots in Resources asset names (`M0_1.json`, not `M0.1.json`).
+19. After writing a parser, print a human-readable dump of its output and read it against the source before trusting it.
 16. C# forbids reusing a local name (`t`, `i`…) in a nested scope of the same method. Inside coroutines give loop variables descriptive names.
 
 ---
@@ -124,3 +127,20 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 
 ### L-018 · verified · Addressables editor API
 - `AddressableAssetSettings.SetDirty(ModificationEvent, object, bool postEvent, bool settingsModified = false)`, `DefaultGroup` and `ModificationEvent.EntryMoved` all exist as used (checked against package source).
+
+### L-019 · verify · Dots in Resources asset names
+- **Risk:** `Resources.Load("Dialogue/M0.1")` for a file named `M0.1.json`. Unity drops the final extension to get the asset name, and a dotted name is a common source of failed loads.
+- **Precaution:** files are named `M0_1.json`; `DialogueDatabase.ResourcePath` maps `"M0.1"` → `"Dialogue/M0_1"`.
+- **Verify in Unity:** the `DialogueTests` EditMode tests load all five scripts through `Resources.Load`.
+- **Rule:** #18.
+
+### L-020 · caught · Dialogue importer mis-parsed two note formats
+- `[QTE-style choice, … only the manner of it: "STAND" or "RUN."]`: the label regex `[^:]*:` treated the whole prose up to the colon as a label and dropped it.
+- `"RUN."`: the period inside the quotes defeated the prompt regex; `STAND` was also counted twice.
+- `[Gameplay ends here — …]` (no colon) came out as "Gameplayends here".
+- **Fix:** strip the label only when it's directly followed by `:`, otherwise keep the bracket text verbatim; allow trailing punctuation inside quotes; de-duplicate prompts.
+- **Found by:** printing a one-line-per-beat dump of every script and comparing it with the doc. **Rule:** #19.
+
+### L-021 · caught · Used /tmp instead of the session scratchpad
+- A test-sensitivity check moved a file to `/tmp`. It was restored, but temporary files belong in the session scratchpad.
+- **Rule:** temporary files go in the scratchpad directory, never `/tmp`.

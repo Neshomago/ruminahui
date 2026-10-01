@@ -190,9 +190,45 @@ namespace UnityEngine
         public static bool visible { get; set; }
     }
 
+    public class TextAsset : Object
+    {
+        public TextAsset() { }
+        public TextAsset(string text) { this.text = text; }
+        public string text { get; private set; }
+    }
+
+    public static class JsonUtility
+    {
+#if NET5_0_OR_GREATER
+        // Runner only: System.Text.Json with public fields ≈ JsonUtility's field serialization.
+        static readonly System.Text.Json.JsonSerializerOptions Opts = new System.Text.Json.JsonSerializerOptions { IncludeFields = true };
+        public static T FromJson<T>(string json) => System.Text.Json.JsonSerializer.Deserialize<T>(json, Opts);
+#else
+        public static T FromJson<T>(string json) => default;
+#endif
+        public static string ToJson(object obj) => "";
+    }
+
     public static class Resources
     {
+#if NET5_0_OR_GREATER
+        // Runner only: TextAssets resolve to real files under Assets/Resources (found by walking up from the binary).
+        public static T Load<T>(string path) where T : Object
+        {
+            if (typeof(T) != typeof(TextAsset)) return null;
+            var dir = new System.IO.DirectoryInfo(AppContext.BaseDirectory);
+            while (dir != null && !System.IO.Directory.Exists(System.IO.Path.Combine(dir.FullName, "Assets", "Resources"))) dir = dir.Parent;
+            if (dir == null) return null;
+            foreach (var ext in new[] { ".json", ".txt", ".bytes" })
+            {
+                var f = System.IO.Path.Combine(dir.FullName, "Assets", "Resources", path + ext);
+                if (System.IO.File.Exists(f)) return (T)(Object)new TextAsset(System.IO.File.ReadAllText(f));
+            }
+            return null;
+        }
+#else
         public static T Load<T>(string path) where T : Object => null;
+#endif
         public static T GetBuiltinResource<T>(string path) where T : Object => null;
         public static AsyncOperation UnloadUnusedAssets() => null;
     }
