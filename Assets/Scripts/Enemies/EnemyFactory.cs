@@ -45,6 +45,7 @@ namespace Ruminahui
                 case EnemyType.Arquebusier: return new Color(0.3f, 0.3f, 0.35f);
                 case EnemyType.SpanishOfficer: return new Color(0.8f, 0.1f, 0.2f);
                 case EnemyType.AtocBoss: return CharacterFactory.AtocColor;
+                case EnemyType.ChaskaSparring: return CharacterFactory.ChaskaColor;
                 default: return Color.magenta;
             }
         }
@@ -178,6 +179,16 @@ namespace Ruminahui
                     visual.AddMarker("Coil", PlaceholderShape.Cylinder, new Color(0.1f, 0.3f, 0.15f), new Vector3(0f, -0.1f, 0f), new Vector3(1.1f, 0.05f, 1.1f));
                     go.AddComponent<BossBarTarget>().displayName = "Atoc";
                     brain = go.AddComponent<AtocBoss>();
+                    break;
+
+                case EnemyType.ChaskaSparring:
+                    health.max = 300f;
+                    motor.moveSpeed = 6.5f;
+                    visual.scale = new Vector3(0.9f, 0.9f, 0.9f);
+                    visual.AddMarker("BladeL", PlaceholderShape.Cube, new Color(0.6f, 0.45f, 0.3f), new Vector3(-0.5f, 0f, 0.25f), new Vector3(0.06f, 0.5f, 0.06f));
+                    visual.AddMarker("BladeR", PlaceholderShape.Cube, new Color(0.6f, 0.45f, 0.3f), new Vector3(0.5f, 0f, 0.25f), new Vector3(0.06f, 0.5f, 0.06f));
+                    go.AddComponent<BossBarTarget>().displayName = "Chaska (sparring)";
+                    brain = go.AddComponent<SparringChaska>();
                     break;
 
                 default:

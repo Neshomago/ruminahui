@@ -32,7 +32,12 @@ Saves live in `Application.persistentDataPath` (`ruminahui_save.json`, `ruminahu
 | `M2.2` | Talk to Atahualpa → escort two carts (panel top-centre; carts halt near enemies) |
 | `M2.3` | Hard ambush → mid-fight, control is taken away for Willka's death |
 | `M5.2` | Evacuate 3 families before the timer ends → light the granary |
-| `M0.2`, `M5.7` | Dialogue from doc 04 plays as subtitles |
+| `M1.1` | Spar with Chaska; tick the checklist (light ×3, heavy, dodge, parry) — you're meant to lose |
+| `M1.2` | Talk to Willka → touch the stones in the told order (above, here, below) → vision sequences (depth-of-field) |
+| `M2.4` | Messenger → Atahualpa → call-in drill (Z / X / C) |
+| `M3.6` | Talk to Atoc and Chaska → the Three-Worlds upgrade menu opens |
+| `M1.4`, `M4.1`, `M4.3`, `M5.7` | Walk-and-talk beats (M4.1 has one skirmish; M5.7 ends on the text card) |
+| `M0.2` | Training yard; doc 04 dialogue plays as subtitles |
 | `Tests/Test_PumaDummy` | Light chain, charged heavy (hold RMB), block (Q), **parry** the middle dummy (tap Q just before its orange flash ends), dodge, Earthbreaker (R) |
 | `Tests/Test_EarlyEncounter` | Break shields with heavies; shields lower (cyan flash) after 2-3 blocked hits; slingers kite you |
 | `Tests/Test_Kuntur` | Tab to mark, RMB bolas then light = finisher, R Vantage Leap onto blue pads, jump + LMB Falling Star, F Sky-Cut, V slow time |

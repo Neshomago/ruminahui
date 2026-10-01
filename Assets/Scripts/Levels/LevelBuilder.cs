@@ -30,9 +30,16 @@ namespace Ruminahui
                 case "M0.1": BuildNightRaid(); break;
                 case "M5.5": BuildSigchos(); break;
                 case "M2.2": BuildConvoy(); break;
+                case "M1.2": BuildThreeWorlds(); break;
+                case "M1.4": BuildLeavingTheForest(); break;
+                case "M2.4": BuildEmpireSplits(); break;
+                case "M3.6": BuildAfterTheFire(); break;
+                case "M4.1": BuildStrangeShips(); break;
+                case "M4.3": BuildNorthToQuito(); break;
+                case "M5.7": BuildWhatTheMountainsKeep(); break;
                 case "M5.6": BuildStoneFace(); break;
                 case "Test_PumaDummy": case "M0.2": BuildDummyYard(contentId); break;
-                case "M1.1": BuildDummyYard(contentId, withChaska: true); break;
+                case "M1.1": BuildTwoProdigies(); break;
                 case "M4.2": BuildDummyYard(contentId, optional: true); break;
                 case "Test_EarlyEncounter": case "M1.3": BuildEarlyEncounter(contentId); break;
                 case "M2.1": BuildGarrisonGauntlet(); break;

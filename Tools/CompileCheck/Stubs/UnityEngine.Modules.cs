@@ -111,6 +111,7 @@ namespace UnityEngine
         public float volume { get; set; }
         public AudioClip clip { get; set; }
         public void Play() { }
+        public void Stop() { }
     }
 
     // UI-adjacent types that live in UnityEngine (UIModule / TextRendering)

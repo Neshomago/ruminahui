@@ -181,3 +181,19 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
   - **M5.2:** 3 family groups to the north gate in 150 s with 2 firing lines, then "Light the fire" (hold 2.5 s). A long, quiet hold and a slow ember-dark fade; no "+1 point" message (the point is still awarded).
   - **M2.3:** harder ambush (×1.3 damage). Mid-final-wave (8 s in, or below 50% HP) control is taken away, the fight slows to a near-stop, Willka steps in and falls, fade out.
 - **Assumptions:** "deal with collaborators" (M5.2) isn't built (no spec). M2.2/M2.3/M5.2 lines are marked placeholders (not in 04).
+
+### 2026-10-01 · Batch D — vision sequences, M1.1 duel, walk-and-talk missions, M2.4 tutorial, M4.1 · all 26 missions built
+- **Docs:** 11 Part A Step 5 (vision camera language); 02 M1.1, M1.2, M1.4, M2.4, M3.6, M4.1, M4.3, M5.7; 04 M5.7; 01 (Three Worlds order; Willka's "it's a teaching, boy, not a truth").
+- **Files:** `Systems/Camera/VisionSequence.cs` (+ `CameraDirector.EnablePostProcessing`, `ShotDrift.Rebase`, `AudioPool.StopAll`), runtime asmdef now references URP/Core runtime; `Missions/StoryBeatsDirector.cs`; `Enemies/SparringChaska.cs` (+ `EnemyType.ChaskaSparring`); `AllyCommandSystem.Issued`; `Levels/LevelBuilder.Story.cs`; `ForcedSwapDirector.SharedVision` now uses the vision language; harness stubs `Stubs/URP.cs` (checked against Graphics source).
+- **What:**
+  - **Vision:** a global Volume with Bokeh DoF blended in over 1.2 s (the only heavy DoF in the game), a drifting shot, and `ExitHard()` = camera cut + DoF off + audio cut in one frame.
+  - **M1.1:** sparring Chaska (HP floors at 50%), a tutorial checklist (light ×3, heavy, perfect dodge, Stone Parry). Once it's done or 60 s pass she presses ×2.5, and the bout ends in a scripted loss at 25% HP.
+  - **M1.2:** Willka's telling, then three stones placed out of the told order (above → here → below). Each correct one gives a vision vignette; a wrong one gets Willka's gentle reset; then a final vision of all three.
+  - **M1.4:** farewell to Chaska → Willka joins on the road → road south.
+  - **M2.4:** messenger → Atahualpa → call-in drill with Kuntur/Amaru "captain" stand-ins (Chaska/Atoc characters renamed and recoloured; call-ins route by kit).
+  - **M3.6:** talk to Atoc and Chaska → the Three-Worlds menu unlocks and opens.
+  - **M4.1:** reports → one skirmish (local raiders).
+  - **M4.3:** messenger → turn north with both as followers.
+  - **M5.7:** the ridge → 04 lines 1.02–1.08 → walk with Atoc → fade → the text card over black → main menu.
+- **Assumptions:** placeholder lines are marked wherever 04 has no script. The M2.4 drill captains are stand-ins until the M2.4 script names them.
+- **All 26 missions now have content; none are placeholders.**

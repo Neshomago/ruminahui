@@ -93,6 +93,7 @@ namespace UnityEngine
         }
         public T GetComponentInParent<T>() => default;
         public T[] GetComponentsInChildren<T>(bool includeInactive) => null;
+        public T[] GetComponentsInChildren<T>() => null;
         public static GameObject CreatePrimitive(PrimitiveType type) => null;
     }
 

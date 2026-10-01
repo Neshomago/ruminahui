@@ -4,7 +4,7 @@ namespace Ruminahui
     public enum EnemyType
     {
         TrainingDummy, Skirmisher, ShieldBearer, ShieldBearerArmored, HighlandScout, AtocLieutenant,
-        SpanishInfantry, SpanishCavalry, Arquebusier, SpanishOfficer, AtocBoss,
+        SpanishInfantry, SpanishCavalry, Arquebusier, SpanishOfficer, AtocBoss, ChaskaSparring,
     }
 
     public static class EnemyStats

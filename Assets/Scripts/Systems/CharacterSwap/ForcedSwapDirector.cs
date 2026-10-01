@@ -211,12 +211,20 @@ namespace Ruminahui
             Progression.Unlock(Unlocks.WhatHeldTheLine);
             Progression.Unlock(Unlocks.GapInTheLine);
             Progression.Unlock(Unlocks.HundredAndOne);
-            var fader = ScreenFader.Instance;
-            if (fader != null)
+
+            // 11 Part A Step 5: the vision language (DoF + drift), all three seen "simultaneously" — then the abrupt return.
+            var vision = VisionSequence.Instance;
+            var c = huacaPoint.position + Vector3.up * 1.4f;
+            if (vision != null)
             {
-                yield return fader.VisionFlash(0.6f, CharacterFactory.RuminahuiColor);
-                yield return fader.VisionFlash(0.6f, CharacterFactory.ChaskaColor);
-                yield return fader.VisionFlash(0.6f, CharacterFactory.AtocColor);
+                yield return vision.Enter(c + huacaPoint.forward * 5f + Vector3.up * 1.5f, c);
+                foreach (var member in new[] { ruminahui, chaska, atoc })
+                {
+                    if (member.Visual != null) member.Visual.Flash(member.color, 1.2f, false);
+                    vision.Reframe(member.transform.position + member.transform.forward * 2.2f + Vector3.up * 1.6f, member.transform.position + Vector3.up * 1.3f);
+                    yield return new WaitForSeconds(1.2f);
+                }
+                vision.ExitHard();
             }
             var puma = ruminahui.Kit as PumaKit;
             if (puma != null) puma.TriggerUltimateFree(); // "'What Held the Line' triggers"

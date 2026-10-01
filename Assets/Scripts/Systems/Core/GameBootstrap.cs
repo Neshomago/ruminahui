@@ -30,6 +30,7 @@ namespace Ruminahui
             SystemsRoot.AddComponent<FreeSwapController>();
             SystemsRoot.AddComponent<AllyCommandSystem>();
             SystemsRoot.AddComponent<PromptSystem>();
+            SystemsRoot.AddComponent<VisionSequence>();
             SystemsRoot.AddComponent<StealthSystem>();
             SystemsRoot.AddComponent<UIRoot>();
 

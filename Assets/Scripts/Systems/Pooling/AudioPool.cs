@@ -42,6 +42,12 @@ namespace Ruminahui
             src.Play();
         }
 
+        /// <summary>Hard audio cut (vision exit, 11 Part A Step 5.3 — camera and audio snap together).</summary>
+        public void StopAll()
+        {
+            foreach (var s in sources) if (s != null) s.Stop();
+        }
+
         public void PlayCue(PlaceholderCue cue, Vector3 position, float volume = 0.5f)
         {
             if (!cueClips.TryGetValue(cue, out var clip))

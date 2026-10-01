@@ -9,6 +9,8 @@ namespace Ruminahui
         public float speed = 0.15f;
         Vector3 origin;
         void Awake() => origin = transform.position;
+        /// <summary>Call after moving the shot so the drift centres on the new position.</summary>
+        public void Rebase() => origin = transform.position;
         void Update() => transform.position = origin + transform.right * Mathf.Sin(Time.time * 0.4f) * speed;
     }
 }

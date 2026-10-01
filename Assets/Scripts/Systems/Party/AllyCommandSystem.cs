@@ -17,6 +17,8 @@ namespace Ruminahui
         public const float TrapNoTargetDistance = 3f;   // with no target, the snare lands ahead of you (pre-placing for ambushes)
 
         public readonly AllyCommandCooldowns Cooldowns = new AllyCommandCooldowns();
+        /// <summary>Raised after a call-in succeeds (M2.4 command tutorial listens).</summary>
+        public event System.Action<AllyCommand, PlayerCharacter> Issued;
         static readonly AllyCommand[] All = { AllyCommand.Mark, AllyCommand.Trap, AllyCommand.Cover };
 
         readonly List<AllyInfo> infos = new List<AllyInfo>();
@@ -111,6 +113,7 @@ namespace Ruminahui
             {
                 Cooldowns.Start(c, Time.time);
                 if (ally.Visual != null) ally.Visual.Flash(Color.white, 0.25f, false);
+                Issued?.Invoke(c, ally);
             }
             return done;
         }

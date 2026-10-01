@@ -37,6 +37,14 @@ namespace Ruminahui
             Brain.DefaultBlend = defaultBlend;
         }
 
+        /// <summary>Post-processing on the main camera (needed for the vision DoF volume — 11 Part A Step 5.2).</summary>
+        public void EnablePostProcessing()
+        {
+            EnsureCamera();
+            var data = UnityEngine.Rendering.Universal.CameraExtensions.GetUniversalAdditionalCameraData(MainCamera);
+            if (data != null) data.renderPostProcessing = true;
+        }
+
         /// <summary>Makes <paramref name="c"/> the live gameplay camera. cut=true hides the change (M3.5 swaps happen under a flash).</summary>
         public void FocusCharacter(PlayerCharacter c, bool cut)
         {

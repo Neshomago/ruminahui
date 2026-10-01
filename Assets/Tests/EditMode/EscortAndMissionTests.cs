@@ -28,5 +28,21 @@ namespace Ruminahui.Tests
             foreach (var id in new[] { "M0.1", "M2.2", "M5.5", "M5.6" })
                 Assert.IsTrue(MissionDatabase.Get(id).HasBuiltContent, id);
         }
+
+        [Test]
+        public void EveryMissionHasBuiltContent_NoPlaceholdersLeft()
+        {
+            foreach (var m in MissionDatabase.Missions)
+                Assert.IsTrue(m.HasBuiltContent, m.Id + " is still a placeholder");
+        }
+
+        [Test]
+        public void ThreeWorldsMenu_UnlocksAtM36()
+        {
+            Progression.ApplyForMission("M3.5");
+            Assert.IsFalse(Progression.IsUnlocked(Unlocks.ThreeWorldsMenu));
+            Progression.ApplyForMission("M3.6");
+            Assert.IsTrue(Progression.IsUnlocked(Unlocks.ThreeWorldsMenu));
+        }
     }
 }

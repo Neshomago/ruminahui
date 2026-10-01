@@ -162,8 +162,10 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 - Settings opened from the pause menu: Settings closed itself on Esc, and the pause menu's Update then saw Settings closed and toggled pause in the same frame.
 - **Fix:** `UIEscape.TryConsume`. The first handler marks the frame; later ones ignore it. **Rule:** #21.
 
-### L-024 · hit (offline compiler) · Stub placed in the wrong assembly
-- `QualitySettings` was stubbed only for the editor check, so the runtime `SaveSystem` failed to compile in the harness. The game code was right; the stub was wrong. **Rule:** #22.
+### L-024 · hit ×2 (offline compiler) · Stub gaps for real Unity APIs
+- `QualitySettings` was stubbed only for the editor check, so the runtime `SaveSystem` failed to compile in the harness. The game code was right; the stub was wrong.
+- Again in batch D: `GameObject.GetComponentsInChildren<T>()` (the parameterless overload exists in Unity) was missing from the stub.
+- **Rule:** #22. When the harness reports a missing member, first ask "does Unity have this?" If yes, fix the stub.
 
 ### L-025 · caught (review) · Early return hid interaction from combat-disabled characters
 - `PlayerBrain`: `if (kit == null || character.CombatDisabled) return;` sat above the Interact handling, so M0.1's boy couldn't gather the wood the mission requires: a softlock.

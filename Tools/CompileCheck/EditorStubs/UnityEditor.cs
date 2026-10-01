@@ -85,28 +85,8 @@ namespace UnityEditor.AddressableAssets
     }
 }
 
-namespace UnityEngine.Rendering
-{
-    public static class GraphicsSettings
-    {
-        public static RenderPipelineAsset defaultRenderPipeline { get; set; }
-    }
-}
 
 
-namespace UnityEngine.Rendering.Universal
-{
-    public abstract class ScriptableRendererData : ScriptableObject { }
-    public class PostProcessData : ScriptableObject { }
-    public class UniversalRendererData : ScriptableRendererData { public PostProcessData postProcessData = null; }
-    public class UniversalRenderPipelineAsset : UnityEngine.Rendering.RenderPipelineAsset
-    {
-        public static UniversalRenderPipelineAsset Create(ScriptableRendererData rendererData = null) => null;
-        public float renderScale { get; set; }
-        public bool supportsHDR { get; set; }
-        public float shadowDistance { get; set; }
-    }
-}
 
 namespace UnityEditor
 {
