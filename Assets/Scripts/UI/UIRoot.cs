@@ -40,13 +40,16 @@ namespace Ruminahui
             Add<ResourceHUD>(HudLayer);
             Add<AbilityStripUI>(HudLayer);
             Add<CallInStripUI>(HudLayer);
+            Add<StealthMeterUI>(HudLayer);
             Add<BossBarUI>(HudLayer);
             Add<ContextPromptUI>(HudLayer);
             Add<SwapSelectorUI>(HudLayer);
             // Overlays (always on top)
-            Add<SubtitleUI>(HudLayer);
             Add<TestHintUI>(OverlayLayer);
             Add<ScreenFader>(OverlayLayer);
+            // Above the fader: subtitles/prompts must read over cinematics and hard cuts to black (M5.6, M5.7 text card).
+            Add<SubtitleUI>(OverlayLayer);
+            Add<PromptUI>(OverlayLayer);
             Add<DebugPanel>(OverlayLayer);
             Add<PauseMenu>(OverlayLayer);
             Add<UpgradeMenuUI>(OverlayLayer);

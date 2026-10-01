@@ -41,6 +41,8 @@ namespace Ruminahui
         {
             var input = GameInput.Instance;
             if (input == null || FreeSwapActive) return; // M5.3: LB is the swap button, and there's no combat
+            var leader = PartyManager.Instance != null ? PartyManager.Instance.Controlled : null;
+            if (leader != null && leader.CombatDisabled) return;
             if (input.Pressed(input.CallMark)) TryIssue(AllyCommand.Mark);
             if (input.Pressed(input.CallTrap)) TryIssue(AllyCommand.Trap);
             if (input.Pressed(input.CallCover)) TryIssue(AllyCommand.Cover);

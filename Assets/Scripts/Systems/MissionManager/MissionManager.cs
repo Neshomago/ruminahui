@@ -26,6 +26,8 @@ namespace Ruminahui
             if (GameInput.Instance != null) GameInput.Instance.ClearCutsceneBlocks();
             PartyManager.Instance?.ClearMembers();
             AllyCommandSystem.Instance?.ResetCooldowns();
+            StealthSystem.Instance?.ClearScene();
+            if (DialogueRunner.Shared != null) { DialogueRunner.Shared.Stop(); DialogueRunner.Shared.AnnouncePrompts = true; }
 
             if (Current != null)
             {

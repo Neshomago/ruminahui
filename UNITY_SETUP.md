@@ -26,7 +26,10 @@ Saves live in `Application.persistentDataPath` (`ruminahui_save.json`, `ruminahu
 
 | Scene | What to try |
 |---|---|
-| `M0.1`, `M0.2`, `M5.5`, `M5.6`, `M5.7` | Their dialogue from doc 04 plays line by line in the hint panel (top-right); stage directions go to the Console |
+| `M0.1` | Talk to villagers, gather wood → raid → sneak cover to cover (eye meter bottom-centre) → WARN HIM prompt |
+| `M5.5` | Same no-attack stealth; cross the open ground (or get seen) → scouts close in → STAND / RUN |
+| `M5.6` | No control except three STAY SILENT prompts; wide still shots; ends on the wind |
+| `M0.2`, `M5.7` | Dialogue from doc 04 plays as subtitles |
 | `Tests/Test_PumaDummy` | Light chain, charged heavy (hold RMB), block (Q), **parry** the middle dummy (tap Q just before its orange flash ends), dodge, Earthbreaker (R) |
 | `Tests/Test_EarlyEncounter` | Break shields with heavies; shields lower (cyan flash) after 2-3 blocked hits; slingers kite you |
 | `Tests/Test_Kuntur` | Tab to mark, RMB bolas then light = finisher, R Vantage Leap onto blue pads, jump + LMB Falling Star, F Sky-Cut, V slow time |

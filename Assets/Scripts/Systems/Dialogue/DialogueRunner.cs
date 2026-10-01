@@ -18,12 +18,14 @@ namespace Ruminahui
         public float sceneGapSeconds = 1f;
 
         public bool IsPlaying { get; private set; }
+        /// <summary>Placeholder missions announce prompts as "not built yet"; built missions turn this off.</summary>
+        public bool AnnouncePrompts = true;
         public DialogueScript Script { get; private set; }
         public DialogueBeat Current { get; private set; }
         Coroutine routine;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void ResetStatics() => BeatPlayed = null;
+        static void ResetStatics() { BeatPlayed = null; shared = null; }
 
         /// <summary>How long a line stays up. Static so it can be unit-tested.</summary>
         public static float LineDuration(string text)
@@ -74,6 +76,43 @@ namespace Ruminahui
             routine = null;
         }
 
+        /// <summary>Plays beats from <paramref name="firstId"/> to <paramref name="lastId"/> inclusive (mission directors interleave
+        /// gameplay between script sections). Missing ids log a warning and play nothing.</summary>
+        public IEnumerator PlayRange(DialogueScript script, string firstId, string lastId)
+        {
+            var beats = new System.Collections.Generic.List<DialogueBeat>();
+            bool inRange = false;
+            foreach (var b in script.AllBeats())
+            {
+                if (b.id == firstId) inRange = true;
+                if (inRange) beats.Add(b);
+                if (b.id == lastId) break;
+            }
+            if (beats.Count == 0 || beats[beats.Count - 1].id != lastId)
+            {
+                Debug.LogWarning($"[Dialogue] Range {firstId}..{lastId} not found in {script.missionId} — re-run the importer?");
+                yield break;
+            }
+            IsPlaying = true;
+            yield return PlayScene(new DialogueScene { heading = "", beats = beats.ToArray() });
+            IsPlaying = false;
+        }
+
+        /// <summary>Runner that lives on the [Systems] root so any director can play script sections.</summary>
+        public static DialogueRunner Shared
+        {
+            get
+            {
+                if (shared == null && GameBootstrap.SystemsRoot != null)
+                {
+                    shared = GameBootstrap.SystemsRoot.GetComponent<DialogueRunner>();
+                    if (shared == null) shared = GameBootstrap.SystemsRoot.AddComponent<DialogueRunner>();
+                }
+                return shared;
+            }
+        }
+        static DialogueRunner shared;
+
         public IEnumerator PlayScene(DialogueScene scene)
         {
             if (!string.IsNullOrEmpty(scene.heading)) Debug.Log($"[Dialogue] — {scene.heading} —");
@@ -102,7 +141,8 @@ namespace Ruminahui
                     case DialogueBeatKind.Gameplay:
                     case DialogueBeatKind.Qte:
                         Debug.Log($"[Dialogue:{beat.kind}] {beat.text}");
-                        if (beat.HasPrompts)
+                        // Built missions run their prompts through PromptSystem themselves; only announce in placeholders.
+                        if (beat.HasPrompts && AnnouncePrompts)
                         {
                             ObjectiveTracker.Say("Prompt (not built yet)", string.Join("  /  ", beat.prompts));
                             yield return new WaitForSeconds(MinLineSeconds);

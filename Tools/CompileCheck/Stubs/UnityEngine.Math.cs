@@ -2,55 +2,68 @@
 #pragma warning disable
 namespace UnityEngine
 {
+    // Real math (not dummies) so logic tests — stealth sight cones, distances — run correctly offline.
     public struct Vector2
     {
         public float x, y;
         public Vector2(float x, float y) { this.x = x; this.y = y; }
-        public static Vector2 zero => default;
+        public static Vector2 zero => new Vector2(0, 0);
         public static Vector2 one => new Vector2(1, 1);
-        public float magnitude => 0f;
-        public static Vector2 operator +(Vector2 a, Vector2 b) => a;
-        public static Vector2 operator -(Vector2 a, Vector2 b) => a;
-        public static Vector2 operator *(Vector2 a, float d) => a;
-        public static Vector2 operator *(float d, Vector2 a) => a;
-        public static implicit operator Vector2(Vector3 v) => default;
-        public static implicit operator Vector3(Vector2 v) => default;
+        public float magnitude => (float)System.Math.Sqrt(x * x + y * y);
+        public static Vector2 operator +(Vector2 a, Vector2 b) => new Vector2(a.x + b.x, a.y + b.y);
+        public static Vector2 operator -(Vector2 a, Vector2 b) => new Vector2(a.x - b.x, a.y - b.y);
+        public static Vector2 operator *(Vector2 a, float d) => new Vector2(a.x * d, a.y * d);
+        public static Vector2 operator *(float d, Vector2 a) => new Vector2(a.x * d, a.y * d);
+        public static implicit operator Vector2(Vector3 v) => new Vector2(v.x, v.y);
+        public static implicit operator Vector3(Vector2 v) => new Vector3(v.x, v.y, 0f);
     }
 
     public struct Vector3
     {
         public float x, y, z;
         public Vector3(float x, float y, float z) { this.x = x; this.y = y; this.z = z; }
-        public static Vector3 zero => default;
-        public static Vector3 one => default;
-        public static Vector3 up => default;
-        public static Vector3 down => default;
-        public static Vector3 forward => default;
-        public static Vector3 back => default;
-        public static Vector3 right => default;
-        public static Vector3 left => default;
-        public float magnitude => 0f;
-        public float sqrMagnitude => 0f;
-        public Vector3 normalized => this;
-        public void Normalize() { }
-        public static float Distance(Vector3 a, Vector3 b) => 0f;
-        public static float Angle(Vector3 from, Vector3 to) => 0f;
-        public static float Dot(Vector3 a, Vector3 b) => 0f;
-        public static Vector3 Cross(Vector3 a, Vector3 b) => a;
-        public static Vector3 Lerp(Vector3 a, Vector3 b, float t) => a;
-        public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDelta) => current;
-        public static Vector3 RotateTowards(Vector3 current, Vector3 target, float maxRadians, float maxMagnitude) => current;
-        public static Vector3 Scale(Vector3 a, Vector3 b) => a;
-        public static Vector3 operator +(Vector3 a, Vector3 b) => a;
-        public static Vector3 operator -(Vector3 a, Vector3 b) => a;
-        public static Vector3 operator -(Vector3 a) => a;
-        public static Vector3 operator *(Vector3 a, float d) => a;
-        public static Vector3 operator *(float d, Vector3 a) => a;
-        public static Vector3 operator /(Vector3 a, float d) => a;
-        public static bool operator ==(Vector3 a, Vector3 b) => true;
-        public static bool operator !=(Vector3 a, Vector3 b) => false;
-        public override bool Equals(object o) => false;
+        public static Vector3 zero => new Vector3(0, 0, 0);
+        public static Vector3 one => new Vector3(1, 1, 1);
+        public static Vector3 up => new Vector3(0, 1, 0);
+        public static Vector3 down => new Vector3(0, -1, 0);
+        public static Vector3 forward => new Vector3(0, 0, 1);
+        public static Vector3 back => new Vector3(0, 0, -1);
+        public static Vector3 right => new Vector3(1, 0, 0);
+        public static Vector3 left => new Vector3(-1, 0, 0);
+        public float magnitude => (float)System.Math.Sqrt(x * x + y * y + z * z);
+        public float sqrMagnitude => x * x + y * y + z * z;
+        public Vector3 normalized { get { float m = magnitude; return m > 1e-5f ? this / m : zero; } }
+        public void Normalize() { this = normalized; }
+        public static float Distance(Vector3 a, Vector3 b) => (a - b).magnitude;
+        public static float Dot(Vector3 a, Vector3 b) => a.x * b.x + a.y * b.y + a.z * b.z;
+        public static float Angle(Vector3 from, Vector3 to)
+        {
+            float d = (float)System.Math.Sqrt(from.sqrMagnitude * to.sqrMagnitude);
+            if (d < 1e-15f) return 0f;
+            float c = Dot(from, to) / d;
+            c = c < -1f ? -1f : c > 1f ? 1f : c;
+            return (float)(System.Math.Acos(c) * 180.0 / System.Math.PI);
+        }
+        public static Vector3 Cross(Vector3 a, Vector3 b) => new Vector3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
+        public static Vector3 Lerp(Vector3 a, Vector3 b, float t) { t = t < 0 ? 0 : t > 1 ? 1 : t; return a + (b - a) * t; }
+        public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDelta)
+        {
+            var d = target - current; float m = d.magnitude;
+            return m <= maxDelta || m == 0f ? target : current + d / m * maxDelta;
+        }
+        public static Vector3 RotateTowards(Vector3 current, Vector3 target, float maxRadians, float maxMagnitude) => target;
+        public static Vector3 Scale(Vector3 a, Vector3 b) => new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
+        public static Vector3 operator +(Vector3 a, Vector3 b) => new Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
+        public static Vector3 operator -(Vector3 a, Vector3 b) => new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+        public static Vector3 operator -(Vector3 a) => new Vector3(-a.x, -a.y, -a.z);
+        public static Vector3 operator *(Vector3 a, float d) => new Vector3(a.x * d, a.y * d, a.z * d);
+        public static Vector3 operator *(float d, Vector3 a) => a * d;
+        public static Vector3 operator /(Vector3 a, float d) => new Vector3(a.x / d, a.y / d, a.z / d);
+        public static bool operator ==(Vector3 a, Vector3 b) => (a - b).sqrMagnitude < 1e-10f;
+        public static bool operator !=(Vector3 a, Vector3 b) => !(a == b);
+        public override bool Equals(object o) => o is Vector3 v && v == this;
         public override int GetHashCode() => 0;
+        public override string ToString() => $"({x:0.##}, {y:0.##}, {z:0.##})";
     }
 
     public struct Quaternion

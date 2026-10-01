@@ -32,7 +32,7 @@ namespace Ruminahui
     {
         public static readonly List<MissionDefinition> Missions = new List<MissionDefinition>
         {
-            new MissionDefinition("M0.1", "Night Raid", 0, "Pillahuaso (child)"),
+            new MissionDefinition("M0.1", "Night Raid", 0, "Pillahuaso (child)", true),
             new MissionDefinition("M0.2", "The Name They Gave Him", 0, "Pillahuaso (child)", true),
             new MissionDefinition("M1.1", "Two Prodigies", 1, "Rumiñahui (teen)", true),
             new MissionDefinition("M1.2", "The Three Worlds", 1, "Rumiñahui (teen)"),
@@ -55,8 +55,8 @@ namespace Ruminahui
             new MissionDefinition("M5.2", "The Hardest Order", 5, "Rumiñahui", true),
             new MissionDefinition("M5.3", "Into the Llanganates", 5, "Rumiñahui / Chaska / Atoc (free swap)", true),
             new MissionDefinition("M5.4", "The Long Retreat", 5, "Rumiñahui (+Chaska/Atoc AI)", true),
-            new MissionDefinition("M5.5", "Sigchos", 5, "Rumiñahui"),
-            new MissionDefinition("M5.6", "Stone Face", 5, "Rumiñahui"),
+            new MissionDefinition("M5.5", "Sigchos", 5, "Rumiñahui", true),
+            new MissionDefinition("M5.6", "Stone Face", 5, "Rumiñahui", true),
             new MissionDefinition("M5.7", "What the Mountains Keep", 5, "Chaska"),
         };
 

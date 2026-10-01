@@ -159,3 +159,14 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
   - **Subtitles:** speaker name in their colour, from `DialogueRunner.BeatPlayed`.
   - **Audio imports:** rules by folder under `Assets/Audio/{Music,Ambience,VO,SFX}`.
 - **Assumptions:** checkpoints inside a mission aren't saved (Continue = mission start). Music volume is stored but there's no music yet. Upgrade cost 1 (PLACEHOLDER-BALANCE).
+
+### 2026-10-01 · Batch B — prompts/QTE, stealth, M0.1 · M5.5 · M5.6
+- **Docs:** 02 M0.1, M5.5, M5.6; 04 those scripts (beat-by-beat via `DialogueRunner.PlayRange`); approved UI U1 (prompt) + U2 (stealth meter).
+- **Files:** `Systems/Prompts/{PromptState,PromptSystem}.cs`, `UI/PromptUI.cs`, `Systems/Stealth/{StealthMath,StealthSystem,StealthWatcher,HidingSpot}.cs`, `UI/StealthMeterUI.cs`, `Systems/Dialogue/{TalkNpc,ScriptedInteractable}.cs`, `Missions/{NightRaidDirector,SigchosDirector,StoneFaceDirector,ScriptedMove}.cs`, `Levels/LevelBuilder.Stealth.cs`; edits: `PlayerCharacter` (`CombatDisabled`, `SetChildForm`), `PlayerBrain`, `DialogueRunner` (`PlayRange`, `Shared`, `AnnouncePrompts`), `AudioPool` (Wind/Horn/DogBark/Spotted cues), HUD strips hide when combat is disabled; `Tests/EditMode/PromptAndStealthTests.cs`.
+- **What:**
+  - **Prompts:** timed (A = Interact), choice (A = Interact, B = Dodge, optional honest caption), quiet (no timer, no fail). Gameplay input is blocked while a prompt is up.
+  - **Stealth:** a sight cone plus line of sight per watcher, one shared meter (the max over watchers, filling faster up close), and hiding spots as zones.
+  - **M0.1:** fireside, then free roam (talk + "gather wood"), then the raid (dog, torches, horn, Elder), then stealth to the wall, Anta's lines, the skirmish, **WARN HIM** (2.5 s; success only delays the outcome), Anta falls, the raiders pass, hard cut.
+  - **M5.5:** the same framing (no attacks). Open ground *or* being spotted brings scouts in from both sides, then "…No.", then **STAND / RUN** with the caption "Neither choice changes what happens next. Only how." STAND = upright capture; RUN = 3 s of running, then brought down.
+  - **M5.6:** a wide, still interior shot; the hard cut to black on his line; **STAY SILENT** ×3 spaced by 6 s of stillness; the Interpreter's offer; the execution ground with the camera on his face; the wind cue, then a cut before anything happens. Combat UI is hidden throughout. Nothing violent is shown (04 production notes).
+- **Assumptions:** being spotted in M0.1 = a quiet retry from the last cover patch (04 writes no fail state). The village NPC lines are marked placeholders (04 doesn't write them). Raiders/scouts are non-combat watchers.

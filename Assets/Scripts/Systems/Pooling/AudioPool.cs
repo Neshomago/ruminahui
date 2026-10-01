@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Ruminahui
 {
-    public enum PlaceholderCue { Hit, Block, Parry, Tell, AmbushSnap, Roar, Flare, Rally, Swap, Vision, Heave, Pickup }
+    public enum PlaceholderCue { Hit, Block, Parry, Tell, AmbushSnap, Roar, Flare, Rally, Swap, Vision, Heave, Pickup, Wind, Horn, DogBark, Spotted }
 
     public class AudioPool : Singleton<AudioPool>
     {
@@ -70,6 +70,10 @@ namespace Ruminahui
                 case PlaceholderCue.Swap: freq = 660f; length = 0.2f; break;
                 case PlaceholderCue.Vision: freq = 220f; length = 1.2f; break;
                 case PlaceholderCue.Heave: freq = 120f; length = 0.4f; break;
+                case PlaceholderCue.Wind: freq = 60f; length = 3.5f; noise = true; break;      // shared by M0.1 opening and M5.6 ending
+                case PlaceholderCue.Horn: freq = 150f; length = 1.4f; break;
+                case PlaceholderCue.DogBark: freq = 600f; length = 0.12f; noise = true; break;
+                case PlaceholderCue.Spotted: freq = 980f; length = 0.3f; break;
                 default: freq = 760f; length = 0.15f; break;
             }
             const int rate = 44100;

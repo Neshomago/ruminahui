@@ -43,7 +43,15 @@ namespace Ruminahui
             var locked = character.Targeting != null ? character.Targeting.Locked : null;
             if (locked != null && canMove && worldMove.sqrMagnitude > 0.01f) motor.FaceTowards(locked.transform.position);
 
-            if (kit == null) return;
+            // Interact works for everyone — including combat-disabled characters (M0.1's boy gathers wood, talks to the village).
+            HandleInteract(input, kit);
+
+            if (kit == null || character.CombatDisabled)
+            {
+                // Stealth missions: move/hide (+ jump) only — no attack option (04 M0.1 / M5.5).
+                if (input.Pressed(input.Jump)) motor.Jump();
+                return;
+            }
 
             // Hold LB = call-in modifier: Y/X/B issue ally commands instead of heavy/light/dodge (approved plan).
             bool freeSwap = FreeSwapController.Instance != null && FreeSwapController.Instance.Active;
@@ -70,13 +78,19 @@ namespace Ruminahui
                 if (character.Targeting != null) character.Targeting.ToggleOrCycle(fwd);
             }
 
-            // Interact / Grapple — interactables that override the kit (Spare) win; then kit context (Grounding Throw); then others.
+        }
+
+        /// <summary>Interact / Grapple — interactables that override the kit (Spare) win; then the kit's context action (Grounding
+        /// Throw, skipped when combat is disabled); then other interactables. Also drives hold-to-interact.</summary>
+        void HandleInteract(GameInput input, CombatKit kit)
+        {
             var sensor = character.Sensor;
+            bool combat = kit != null && !character.CombatDisabled;
             if (input.Pressed(input.Interact))
             {
                 bool done = false;
                 if (sensor != null && sensor.Current != null && sensor.Current.OverridesKitContext) done = sensor.Press();
-                if (!done) done = kit.TryContextAction();
+                if (!done && combat) done = kit.TryContextAction();
                 if (!done && sensor != null) sensor.Press();
             }
             if (sensor != null)

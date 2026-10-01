@@ -34,6 +34,18 @@ namespace Ruminahui
         public CombatTarget AllyTarget { get; set; }
         /// <summary>Scripted states (M3.5 "drops to one knee", M5.3 station holds) freeze the brain.</summary>
         public bool ScriptLocked { get; set; }
+        /// <summary>04/02: M0.1 and M5.5 are movement/stealth only — "the UI deliberately shows no attack option".</summary>
+        public bool CombatDisabled { get; set; }
+
+        /// <summary>M0.1: Pillahuaso, age 10 — smaller, slower, no combat.</summary>
+        public void SetChildForm()
+        {
+            displayName = "Pillahuaso";
+            CombatDisabled = true;
+            Motor.moveSpeed = 4.2f;      // PLACEHOLDER-BALANCE
+            Motor.jumpHeight = 0.6f;
+            if (Visual != null) Visual.SetPoseScale(new Vector3(0.72f, 0.66f, 0.72f));
+        }
 
         public FocusPool Focus => PartyManager.Instance != null ? PartyManager.Instance.Focus : null;
 

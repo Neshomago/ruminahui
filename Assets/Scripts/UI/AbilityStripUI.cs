@@ -28,7 +28,7 @@ namespace Ruminahui
         void Update()
         {
             var c = Controlled;
-            var kit = c != null ? c.Kit : null;
+            var kit = c != null && !c.CombatDisabled ? c.Kit : null;
             for (int i = 0; i < 4; i++)
             {
                 AbilitySlot slot = null;

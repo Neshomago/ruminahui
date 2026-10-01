@@ -41,7 +41,8 @@ namespace Ruminahui
         {
             var sys = AllyCommandSystem.Instance;
             var swap = FreeSwapController.Instance;
-            bool show = sys != null && sys.HasAllies && (swap == null || !swap.Active);
+            var leader = Controlled;
+            bool show = sys != null && sys.HasAllies && (swap == null || !swap.Active) && (leader == null || !leader.CombatDisabled);
             row.gameObject.SetActive(show);
             if (!show) return;
 

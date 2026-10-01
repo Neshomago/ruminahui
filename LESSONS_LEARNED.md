@@ -33,6 +33,9 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 20. Before using an API I "remember", check its current docs/source. Names drift between package versions.
 21. Stacked menus + one key: whoever handles Esc consumes it for the frame (`UIEscape.TryConsume`).
 22. When a stub is missing a REAL Unity API (e.g. `QualitySettings` is runtime, not editor-only), fix the stub, not the game code.
+23. A feature gate ("combat disabled") goes around the gated code only, never as an early `return` above shared logic (interaction, movement).
+24. Anything that must read during cinematics or black screens (subtitles, prompts) lives above the fader, outside the HUD group.
+25. Stubs used by logic tests need REAL implementations (math), or the tests pass vacuously.
 
 ---
 
@@ -160,3 +163,15 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 
 ### L-024 · hit (offline compiler) · Stub placed in the wrong assembly
 - `QualitySettings` was stubbed only for the editor check, so the runtime `SaveSystem` failed to compile in the harness. The game code was right; the stub was wrong. **Rule:** #22.
+
+### L-025 · caught (review) · Early return hid interaction from combat-disabled characters
+- `PlayerBrain`: `if (kit == null || character.CombatDisabled) return;` sat above the Interact handling, so M0.1's boy couldn't gather the wood the mission requires: a softlock.
+- **Fix:** Interact moved into `HandleInteract`, called before the combat gate. The kit's context action is skipped when combat is disabled. **Rule:** #23.
+
+### L-026 · caught (review) · Subtitles/prompts inside the HUD group would vanish in cinematics
+- `SetCombatUIVisible(false)` (spare shot, M3.5 convergence, all of M5.6) and the black fader would have hidden subtitles and the STAY SILENT prompt.
+- **Fix:** `SubtitleUI` and `PromptUI` moved to the overlay layer, after `ScreenFader`. **Rule:** #24.
+
+### L-027 · caught · Dummy math in stubs makes geometry tests meaningless
+- `Vector3.Angle`/`Distance` returned 0 in the stubs, so a sight-cone test would have "passed" for any input.
+- **Fix:** real `Vector2`/`Vector3` math in `Tools/CompileCheck/Stubs/UnityEngine.Math.cs`. **Rule:** #25.
