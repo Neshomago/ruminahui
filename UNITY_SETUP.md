@@ -55,3 +55,20 @@ Saves live in `Application.persistentDataPath` (`ruminahui_save.json`, `ruminahu
 
 ## 5. When something breaks
 Send the Console errors (first error first). Every error gets logged in `LESSONS_LEARNED.md` with its fix and a prevention rule.
+
+## 6. Unity-only work — where each piece plugs in
+These need the editor, so the code leaves a single, clear hook for each.
+
+| Task | Doc | Hook in code |
+|---|---|---|
+| **Real models + animation** | AI_BUILD_PROMPT | Set `PlaceholderVisual.modelPrefab` on the prefabs from *Rumiñahui ▸ 3. Save Placeholder Prefabs*. Poses currently fake it with `SetPoseScale`; replace those calls with Animator triggers. |
+| **Animator culling** | 11 B Step 6 | On each model's Animator set Culling Mode = *Cull Update Transforms* (no code needed). |
+| **Timeline cutscenes** | 11 A Step 4 | Every placeholder shot goes through `CameraDirector.CreateShot` / `PlayShot` (spare, M2.3 Willka, M3.5 convergence, M5.6). Swap each for a `PlayableDirector` with a CinemachineTrack. |
+| **Vision post FX tuning** | 11 A Step 5 | `VisionSequence` (DoF values at the top). Replace `ShotDrift` with a Cinemachine Noise profile on the vision camera. |
+| **NavMesh** | (for real levels) | Enemy steering is centralised in `EnemyBrain.MoveTowards/MoveAwayFrom/Strafe`; escorts in `EscortTarget.Update`; allies in `AllyBrain.MoveTo`. Swap those three for NavMeshAgent paths. |
+| **Real environments** | 07 / 10 | Each mission's layout is one method in `Levels/LevelBuilder*.cs`. Replace it with authored scene content and keep the director wiring. |
+| **Occlusion culling + static flags** | 11 B Steps 4-5 | Bake per scene once real geometry exists. Code-built placeholder geometry is already static-batched at runtime. |
+| **Audio** | 11 B Step 7 | Drop clips in `Assets/Audio/{Music,Ambience,VO,SFX}`; `AudioImportRules` sets compression. Replace `PlaceholderCue` tones with clips in `AudioPool`. VO hooks into `DialogueRunner.BeatPlayed`. |
+| **Play-mode tests** | — | Good first ones: the parry window, shield guard-break, M3.5 section restart, and M5.3 swap lock. All of them can drive `CombatKit.Cmd*` directly. |
+| **Balance** | — | `grep -rn "PLACEHOLDER-BALANCE" Assets/Scripts`, with enemy stat tiers in `Enemies/EnemyStats.cs`. |
+| **Missing dialogue** | 04 | Lines marked `[placeholder]` (M1.1-M4.3, village NPCs). Write them in 04, run the importer, and switch the director to `PlayRange`. |
