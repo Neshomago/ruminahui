@@ -30,6 +30,7 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 17. Generated data (dialogue JSON) is never hand-edited. Change the source doc, re-run the importer; `check.sh` fails on drift.
 18. Don't put dots in Resources asset names (`M0_1.json`, not `M0.1.json`).
 19. After writing a parser, print a human-readable dump of its output and read it against the source before trusting it.
+20. Before using an API I "remember", check its current docs/source. Names drift between package versions.
 
 ---
 
@@ -144,3 +145,9 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 ### L-021 · caught · Used /tmp instead of the session scratchpad
 - A test-sensitivity check moved a file to `/tmp`. It was restored, but temporary files belong in the session scratchpad.
 - **Rule:** temporary files go in the scratchpad directory, never `/tmp`.
+
+### L-022 · verified (Input System 1.11 docs) · Modifier composite name
+- I was about to write `AddCompositeBinding("ButtonWithOneModifier").With("Modifier", …).With("Button", …)`, an older name. The current Input System documents **`"OneModifier"`** with parts **`Modifier`** and **`Binding`**.
+- **Used:** `AddCompositeBinding("OneModifier").With("Modifier", "<Gamepad>/leftShoulder").With("Binding", "<Gamepad>/buttonNorth")` (`GameInput.CallIn`).
+- **Verify in Unity:** hold LB + Y marks; Y alone still does a heavy attack.
+- **Rule:** #20.

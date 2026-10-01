@@ -45,13 +45,17 @@ namespace Ruminahui
 
             if (kit == null) return;
 
+            // Hold LB = call-in modifier: Y/X/B issue ally commands instead of heavy/light/dodge (approved plan).
+            bool freeSwap = FreeSwapController.Instance != null && FreeSwapController.Instance.Active;
+            bool commanding = input.CommandModifierHeld && !freeSwap;
+
             if (input.Pressed(input.Jump)) kit.CmdJump();
-            if (input.Pressed(input.Light)) kit.CmdLight();
-            if (input.Pressed(input.Heavy)) kit.CmdHeavyPressed();
+            if (!commanding && input.Pressed(input.Light)) kit.CmdLight();
+            if (!commanding && input.Pressed(input.Heavy)) kit.CmdHeavyPressed();
             if (input.Released(input.Heavy)) kit.CmdHeavyReleased();
             if (input.Pressed(input.Block)) kit.CmdBlockPressed();
             if (input.Released(input.Block)) kit.CmdBlockReleased();
-            if (input.Pressed(input.Dodge))
+            if (!commanding && input.Pressed(input.Dodge))
                 kit.CmdDodge(worldMove.sqrMagnitude > 0.01f ? worldMove : -transform.forward);
             if (input.Pressed(input.Special1)) kit.CmdSpecial(0);
             if (input.Pressed(input.Special2)) kit.CmdSpecial(1);

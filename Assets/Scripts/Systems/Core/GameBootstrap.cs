@@ -27,6 +27,7 @@ namespace Ruminahui
             SystemsRoot.AddComponent<CheckpointService>();
             SystemsRoot.AddComponent<MissionManager>();
             SystemsRoot.AddComponent<FreeSwapController>();
+            SystemsRoot.AddComponent<AllyCommandSystem>();
             SystemsRoot.AddComponent<UIRoot>();
 
             EnemyFactory.RegisterPools();

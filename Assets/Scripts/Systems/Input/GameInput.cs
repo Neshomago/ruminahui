@@ -10,7 +10,8 @@ namespace Ruminahui
     {
         public InputAction Move, LookMouse, LookStick, Jump, Light, Heavy, Block, Dodge, Interact, Mark,
             Special1, Special2, Special3, Ultimate, Place, SwapNext, SwapPrev, Swap1, Swap2, Swap3,
-            Pause, DebugToggle, HintToggle;
+            Pause, DebugToggle, HintToggle,
+            CallMark, CallTrap, CallCover, CommandModifier;
 
         public float mouseSensitivity = 0.12f;
         public float stickSensitivity = 160f;
@@ -58,7 +59,26 @@ namespace Ruminahui
             Pause = Button("Pause", "<Keyboard>/escape", "<Gamepad>/start");
             DebugToggle = Button("DebugToggle", "<Keyboard>/f1", "<Gamepad>/select");
             HintToggle = Button("HintToggle", "<Keyboard>/h", null);
+
+            // Ally call-ins (03 Section 4): Z / X / C, or hold LB + Y / X / B ("OneModifier" composite — LESSONS L-022).
+            CommandModifier = Button("CommandModifier", null, "<Gamepad>/leftShoulder");
+            CallMark = CallIn("CallMark", "<Keyboard>/z", "<Gamepad>/buttonNorth");
+            CallTrap = CallIn("CallTrap", "<Keyboard>/x", "<Gamepad>/buttonWest");
+            CallCover = CallIn("CallCover", "<Keyboard>/c", "<Gamepad>/buttonEast");
         }
+
+        static InputAction CallIn(string name, string keyboard, string gamepadButton)
+        {
+            var a = new InputAction(name, InputActionType.Button);
+            a.AddBinding(keyboard);
+            a.AddCompositeBinding("OneModifier")
+                .With("Modifier", "<Gamepad>/leftShoulder")
+                .With("Binding", gamepadButton);
+            return a;
+        }
+
+        /// <summary>While LB is held the face buttons issue call-ins instead of attacking/dodging.</summary>
+        public bool CommandModifierHeld => CommandModifier != null && CommandModifier.IsPressed();
 
         static InputAction Button(string name, string keyboard, string gamepad)
         {
@@ -69,7 +89,8 @@ namespace Ruminahui
         }
 
         InputAction[] All => new[] { Move, LookMouse, LookStick, Jump, Light, Heavy, Block, Dodge, Interact, Mark,
-            Special1, Special2, Special3, Ultimate, Place, SwapNext, SwapPrev, Swap1, Swap2, Swap3, Pause, DebugToggle, HintToggle };
+            Special1, Special2, Special3, Ultimate, Place, SwapNext, SwapPrev, Swap1, Swap2, Swap3, Pause, DebugToggle, HintToggle,
+            CallMark, CallTrap, CallCover, CommandModifier };
 
         void OnEnable()
         {

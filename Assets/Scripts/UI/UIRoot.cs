@@ -39,6 +39,7 @@ namespace Ruminahui
             Add<DamageNumbers>(HudLayer);
             Add<ResourceHUD>(HudLayer);
             Add<AbilityStripUI>(HudLayer);
+            Add<CallInStripUI>(HudLayer);
             Add<BossBarUI>(HudLayer);
             Add<ContextPromptUI>(HudLayer);
             Add<SwapSelectorUI>(HudLayer);

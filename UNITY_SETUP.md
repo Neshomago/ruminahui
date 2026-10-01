@@ -30,7 +30,7 @@ Open any scene and press **Play**. `_Boot` opens the mission/test list (Esc also
 | `Tests/Test_Kuntur` | Tab to mark, RMB bolas then light = finisher, R Vantage Leap onto blue pads, jump + LMB Falling Star, F Sky-Cut, V slow time |
 | `Tests/Test_Amaru` | T snares ahead *before* the hidden scouts spring (listen for the snap), RMB Coil Grab into snares, Shift decoy vs the arquebusier, Q riposte |
 | `Tests/Test_AtocBoss` | Three phases, decoys (the fake ones don't bob), cover, red roar = unblockable string, then **Spare** |
-| `Tests/Test_AllEnemies` | One of each enemy on a ring; Chaska and Atoc fight as AI allies |
+| `Tests/Test_AllEnemies` | One of each enemy on a ring; Chaska and Atoc fight as AI allies. Try the **call-ins**: Z Mark, X Trap, C Cover (gamepad: hold LB + Y/X/B); the strip above the abilities shows cooldowns and why one is unavailable |
 | `Tests/Test_M3_5_ForcedSwap` | Rumiñahui → flash → Chaska → flash → Atoc → convergence → final wave with allies. Die as Chaska/Atoc: only that section restarts |
 | `Tests/Test_M5_3_FreeSwap` | 1/2/3 to swap. Gate (Rumiñahui), ravine (Chaska), deadfalls (Atoc), regroup, joint lift, chamber |
 

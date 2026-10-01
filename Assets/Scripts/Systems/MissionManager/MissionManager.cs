@@ -25,6 +25,7 @@ namespace Ruminahui
             DifficultyScaler.EnemyDamage = 1f;
             if (GameInput.Instance != null) GameInput.Instance.ClearCutsceneBlocks();
             PartyManager.Instance?.ClearMembers();
+            AllyCommandSystem.Instance?.ResetCooldowns();
 
             if (Current != null)
             {

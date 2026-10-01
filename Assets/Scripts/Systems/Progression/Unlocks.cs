@@ -20,6 +20,7 @@ namespace Ruminahui
         public const string HundredAndOne = "Amaru.Ultimate";        // M3.5
         // Systems
         public const string TellReading = "Focus.TellReading";       // post-M3.5 Focus source (03 Section 0)
+        public const string AllyCommands = "Ally.Commands";          // 03 Section 4 call-ins; 02 M2.4 "light command-tutorial"
     }
 
     /// <summary>Mission id from which each flag is available (inclusive).</summary>
@@ -30,6 +31,7 @@ namespace Ruminahui
             (Unlocks.VantageLeap, "M1.1"),
             (Unlocks.Earthbreaker, "M1.3"),     // ASSUMPTION: first crowd-control mission in Act I
             (Unlocks.Unyielding, "M2.4"),       // first mission after Willka's death
+            (Unlocks.AllyCommands, "M2.4"),     // 02: M2.4 introduces ally-command mechanics
             (Unlocks.SkyCut, "M3.2"),
             (Unlocks.StoneFace, "M3.5"),        // unlocked by completing M3.4
             (Unlocks.WhatHeldTheLine, "M3.6"),  // granted live at M3.5 stage N, permanently from M3.6

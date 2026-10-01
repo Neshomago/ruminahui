@@ -50,6 +50,7 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
 | Specials 1-3 · ultimate | R F G · V | d-pad ↑ → ← · L3 |
 | Snare (Amaru) | T | d-pad ↓ |
 | Swap (M5.3) | 1 2 3 · [ ] | LB / RB |
+| Ally call-ins: Mark · Trap · Cover | Z · X · C | hold LB + Y · X · B |
 | Pause · debug · hint panel | Esc · F1 · H | Start · Select |
 
 ---
@@ -139,3 +140,10 @@ Mistakes and their prevention rules live in `LESSONS_LEARNED.md`. Setup and test
 - **What:** the doc is the source of truth. The importer turns it into JSON (scenes → beats: line / action / gameplay / qte / textcard, with stable ids like `M5.6.2.05` and prompt labels extracted from notes: `WARN HIM`, `STAND`/`RUN`, `STAY SILENT`). `--check` fails if the JSON is stale, and `check.sh` runs it. All 31 spoken lines are present. Playback is a placeholder: lines go through `ObjectiveTracker.Say` (shown in the existing hint panel), stage directions go to the Console, prompts are announced "not built yet". `DialogueRunner.BeatPlayed` is the hook for the future subtitle UI / VO.
 - **Assumptions:** line duration = 0.8 s + 0.055 s/char, clamped to 2-7 s (PLACEHOLDER-BALANCE). Speaker names are title-cased from the doc's caps (`RUMIÑAHUI` → `Rumiñahui`). No new UI (subtitles still deferred; they'll need an approved UI plan).
 - **Workflow:** edit `docs/04-dialogue-script.md` → `python3 Tools/DialogueImport/import_dialogue.py` → commit doc + JSON together.
+
+### 2026-09-30 · Ally call-ins (Mark / Trap / Cover)
+- **Doc:** 03 Section 4 ("call-in a mark, call-in a trap, call-in a dodge-assist"); 02 M2.4 (ally-command mechanics introduced). Plan approved 2026-09-30.
+- **Files:** `Systems/Party/{AllyCommandRules,AllyCommandSystem}.cs`, `Combat/Shared/CoverAssist.cs`, `UI/CallInStripUI.cs`; edits to `GameInput`, `PlayerBrain`, `Unlocks`, `GameBootstrap`, `MissionManager`, `UIRoot`, `DebugPanel`, `TestHintUI`; `Tests/EditMode/AllyCommandTests.cs`.
+- **What:** **Mark** → the Kuntur ally marks your locked/aimed target + up to 2 enemies within 6 m. **Trap** → the Amaru ally throws a Snare at the target's feet after 0.4 s (no target: 3 m ahead of you, for pre-placing against ambushes). **Cover** → for 3 s the first hostile hit on you becomes an evade (2.2 m pull + perfect-dodge Focus), once per call. Routing is by kit, not name; Cover picks the nearest eligible ally. An ally must be in Combat mode, not scripted, alive and ≤30 m. Cooldowns 8/12/15 s, no Focus cost. Unlocked from M2.4 (all on in test scenes). Off while free swap is active. A failed call (no target) doesn't spend the cooldown. Cooldowns reset at scene start; F1 can reset them.
+- **UI (approved):** 3-slot strip above the ability strip; greyed with a reason ("Chaska not here", "Atoc held back", "Cooling down"…); hidden with no allies; brightens with Y/X/B glyphs while LB is held. Ally barks go through the hint panel.
+- **Assumptions:** Cover's interceptor runs before kit i-frames/blocks (priority 110) because the ally acts first. Mark/Trap targets: lock-on first, else the best enemy in a 35° cone ≤20 m. Where to try it: M3.1 (Chaska), M5.4 and `Test_AllEnemies` (both allies), M3.5 stage L. M2.4 itself is still a placeholder (no allies yet).

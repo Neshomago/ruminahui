@@ -31,6 +31,7 @@ namespace Ruminahui
             Btn(list, "God mode: toggle", () => PartyManager.Instance?.SetGodMode(!PartyManager.Instance.GodMode));
             Btn(list, "Tell flashes: toggle", () => TellFlashSettings.Enabled = !TellFlashSettings.Enabled);
             Btn(list, "Damage numbers: toggle", () => DamageNumbers.Enabled = !DamageNumbers.Enabled);
+            Btn(list, "Reset call-in cooldowns", () => AllyCommandSystem.Instance?.ResetCooldowns());
 
             Header(list, "Upgrade tiers (0-3)");
             foreach (KitId k in System.Enum.GetValues(typeof(KitId)))
