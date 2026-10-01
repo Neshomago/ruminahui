@@ -42,7 +42,7 @@ namespace UnityEngine.UI
         public Color pressedColor { get; set; }
     }
 
-    public class Selectable : UIBehaviour { public ColorBlock colors { get; set; } }
+    public class Selectable : UIBehaviour { public ColorBlock colors { get; set; } public bool interactable { get; set; } }
     public class Button : Selectable
     {
         public class ButtonClickedEvent : UnityEngine.Events.UnityEvent { }

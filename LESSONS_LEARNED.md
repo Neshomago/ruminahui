@@ -31,6 +31,8 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 18. Don't put dots in Resources asset names (`M0_1.json`, not `M0.1.json`).
 19. After writing a parser, print a human-readable dump of its output and read it against the source before trusting it.
 20. Before using an API I "remember", check its current docs/source. Names drift between package versions.
+21. Stacked menus + one key: whoever handles Esc consumes it for the frame (`UIEscape.TryConsume`).
+22. When a stub is missing a REAL Unity API (e.g. `QualitySettings` is runtime, not editor-only), fix the stub, not the game code.
 
 ---
 
@@ -151,3 +153,10 @@ When Unity reports an error: find it here first. If it's new, add an entry (ID, 
 - **Used:** `AddCompositeBinding("OneModifier").With("Modifier", "<Gamepad>/leftShoulder").With("Binding", "<Gamepad>/buttonNorth")` (`GameInput.CallIn`).
 - **Verify in Unity:** hold LB + Y marks; Y alone still does a heavy attack.
 - **Rule:** #20.
+
+### L-023 · caught · One Esc press closing two stacked menus
+- Settings opened from the pause menu: Settings closed itself on Esc, and the pause menu's Update then saw Settings closed and toggled pause in the same frame.
+- **Fix:** `UIEscape.TryConsume`. The first handler marks the frame; later ones ignore it. **Rule:** #21.
+
+### L-024 · hit (offline compiler) · Stub placed in the wrong assembly
+- `QualitySettings` was stubbed only for the editor check, so the runtime `SaveSystem` failed to compile in the harness. The game code was right; the stub was wrong. **Rule:** #22.

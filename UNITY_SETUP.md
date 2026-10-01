@@ -20,7 +20,9 @@ After editing the dialogue doc: `python3 Tools/DialogueImport/import_dialogue.py
 3. *(Optional)* **3. Save Placeholder Prefabs**: saves every character/enemy to `Assets/Prefabs/Placeholder` and switches the factories to use them. This is where real art gets swapped in later.
 
 ## 3. What to test
-Open any scene and press **Play**. `_Boot` opens the mission/test list (Esc also opens it at any time).
+Open any scene and press **Play**. `_Boot` opens the **main menu** (New Game / Continue / Missions / Settings / Quit). Esc in a mission opens the pause menu (Upgrades, Settings, mission list).
+
+Saves live in `Application.persistentDataPath` (`ruminahui_save.json`, `ruminahui_settings.json`). Delete them to start fresh.
 
 | Scene | What to try |
 |---|---|

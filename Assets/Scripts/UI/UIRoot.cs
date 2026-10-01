@@ -44,10 +44,14 @@ namespace Ruminahui
             Add<ContextPromptUI>(HudLayer);
             Add<SwapSelectorUI>(HudLayer);
             // Overlays (always on top)
+            Add<SubtitleUI>(HudLayer);
             Add<TestHintUI>(OverlayLayer);
             Add<ScreenFader>(OverlayLayer);
             Add<DebugPanel>(OverlayLayer);
             Add<PauseMenu>(OverlayLayer);
+            Add<UpgradeMenuUI>(OverlayLayer);
+            Add<MainMenuUI>(OverlayLayer);
+            Add<SettingsPanel>(OverlayLayer);
         }
 
         void Start() => EnsureEventSystem();

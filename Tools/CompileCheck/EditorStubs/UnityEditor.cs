@@ -87,23 +87,12 @@ namespace UnityEditor.AddressableAssets
 
 namespace UnityEngine.Rendering
 {
-    public abstract class RenderPipelineAsset : ScriptableObject { }
     public static class GraphicsSettings
     {
         public static RenderPipelineAsset defaultRenderPipeline { get; set; }
     }
 }
 
-namespace UnityEngine
-{
-    public static class QualitySettings
-    {
-        public static string[] names => new string[0];
-        public static int GetQualityLevel() => 0;
-        public static void SetQualityLevel(int index, bool applyExpensiveChanges = true) { }
-        public static UnityEngine.Rendering.RenderPipelineAsset renderPipeline { get; set; }
-    }
-}
 
 namespace UnityEngine.Rendering.Universal
 {
@@ -117,4 +106,31 @@ namespace UnityEngine.Rendering.Universal
         public bool supportsHDR { get; set; }
         public float shadowDistance { get; set; }
     }
+}
+
+namespace UnityEditor
+{
+    public class AssetImporter : UnityEngine.Object { }
+    public struct AudioImporterSampleSettings
+    {
+        public UnityEngine.AudioClipLoadType loadType;
+        public UnityEngine.AudioCompressionFormat compressionFormat;
+        public float quality;
+    }
+    public sealed class AudioImporter : AssetImporter
+    {
+        public AudioImporterSampleSettings defaultSampleSettings { get; set; }
+        public bool forceToMono { get; set; }
+    }
+    public class AssetPostprocessor
+    {
+        public string assetPath { get; set; }
+        public AssetImporter assetImporter => null;
+    }
+}
+
+namespace UnityEngine
+{
+    public enum AudioClipLoadType { DecompressOnLoad, CompressedInMemory, Streaming }
+    public enum AudioCompressionFormat { PCM, Vorbis, ADPCM, MP3, VAG, HEVAG, XMA, AAC, GCADPCM, ATRAC9 }
 }

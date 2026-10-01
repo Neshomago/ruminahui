@@ -19,6 +19,7 @@ namespace Ruminahui
 
             // Order matters: later systems look up earlier ones in their Awake.
             SystemsRoot.AddComponent<PoolManager>();
+            SystemsRoot.AddComponent<SaveSystem>();
             SystemsRoot.AddComponent<AudioPool>();
             SystemsRoot.AddComponent<GameInput>();
             SystemsRoot.AddComponent<SceneStreamer>();

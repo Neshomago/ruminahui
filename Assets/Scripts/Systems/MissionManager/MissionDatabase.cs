@@ -11,6 +11,14 @@ namespace Ruminahui
         public int Act;              // 0 = Prologue
         public string PlaysAs;
         public bool HasBuiltContent; // false → placeholder scene with a "complete mission" zone
+        /// <summary>Completing it earns 1 upgrade point (approved economy: combat missions only).</summary>
+        public bool AwardsUpgradePoint => CombatMissions.Contains(Id);
+
+        // Missions whose 02 gameplay notes include combat (M4.2's optional gauntlet counts).
+        static readonly System.Collections.Generic.HashSet<string> CombatMissions = new System.Collections.Generic.HashSet<string>
+        {
+            "M1.1", "M1.3", "M2.1", "M2.2", "M2.3", "M3.1", "M3.2", "M3.3", "M3.4", "M3.5", "M4.1", "M4.2", "M5.1", "M5.2", "M5.4",
+        };
 
         public MissionDefinition(string id, string title, int act, string playsAs, bool built = false)
         {

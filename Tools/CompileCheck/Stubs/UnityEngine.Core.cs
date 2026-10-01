@@ -4,6 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+namespace UnityEngine.Rendering
+{
+    public abstract class RenderPipelineAsset : ScriptableObject { }
+}
+
 namespace UnityEngine
 {
     public class Object
@@ -160,6 +165,7 @@ namespace UnityEngine
         public static float deltaTime => 0f;
         public static float unscaledDeltaTime => 0f;
         public static float timeScale { get; set; }
+        public static int frameCount => 0;
     }
 
     public static class Debug
@@ -180,7 +186,17 @@ namespace UnityEngine
     public static class Application
     {
         public static bool CanStreamedLevelBeLoaded(string levelName) => true;
+        public static string persistentDataPath => System.IO.Path.GetTempPath();
+        public static void Quit() { }
         public static bool isPlaying => true;
+    }
+
+    public static class QualitySettings
+    {
+        public static string[] names => new string[0];
+        public static int GetQualityLevel() => 0;
+        public static void SetQualityLevel(int index, bool applyExpensiveChanges = true) { }
+        public static UnityEngine.Rendering.RenderPipelineAsset renderPipeline { get; set; }
     }
 
     public enum CursorLockMode { None, Locked, Confined }
@@ -197,16 +213,22 @@ namespace UnityEngine
         public string text { get; private set; }
     }
 
+    public static class ColorUtility
+    {
+        public static string ToHtmlStringRGB(Color color) => "FFFFFF";
+    }
+
     public static class JsonUtility
     {
 #if NET5_0_OR_GREATER
         // Runner only: System.Text.Json with public fields ≈ JsonUtility's field serialization.
         static readonly System.Text.Json.JsonSerializerOptions Opts = new System.Text.Json.JsonSerializerOptions { IncludeFields = true };
         public static T FromJson<T>(string json) => System.Text.Json.JsonSerializer.Deserialize<T>(json, Opts);
+        public static string ToJson(object obj, bool prettyPrint = false) => System.Text.Json.JsonSerializer.Serialize(obj, obj.GetType(), Opts);
 #else
         public static T FromJson<T>(string json) => default;
+        public static string ToJson(object obj, bool prettyPrint = false) => "";
 #endif
-        public static string ToJson(object obj) => "";
     }
 
     public static class Resources

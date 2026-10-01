@@ -107,5 +107,6 @@ namespace UnityEngine
         public static float MoveTowardsAngle(float current, float target, float maxDelta) => current;
         public static int CeilToInt(float f) => (int)System.Math.Ceiling(f);
         public static int FloorToInt(float f) => (int)System.Math.Floor(f);
+        public static int RoundToInt(float f) => (int)System.Math.Round(f, System.MidpointRounding.ToEven); // Unity rounds half to even
     }
 }

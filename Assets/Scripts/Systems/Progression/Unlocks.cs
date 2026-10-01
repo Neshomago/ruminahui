@@ -21,6 +21,7 @@ namespace Ruminahui
         // Systems
         public const string TellReading = "Focus.TellReading";       // post-M3.5 Focus source (03 Section 0)
         public const string AllyCommands = "Ally.Commands";          // 03 Section 4 call-ins; 02 M2.4 "light command-tutorial"
+        public const string ThreeWorldsMenu = "Menu.ThreeWorlds";    // 02 M3.6 "full unlock of the Three-Worlds ability menu"
     }
 
     /// <summary>Mission id from which each flag is available (inclusive).</summary>
@@ -39,6 +40,7 @@ namespace Ruminahui
             (Unlocks.HundredAndOne, "M3.6"),
             (Unlocks.StarFall, "M3.6"),
             (Unlocks.TellReading, "M3.6"),
+            (Unlocks.ThreeWorldsMenu, "M3.6"),
             (Unlocks.NumbingDraught, "M4.1"),   // first mission after M3.6
             (Unlocks.LastFang, "M5.1"),         // ASSUMPTION: "Act V" → from its first mission
             (Unlocks.FalseTrail, "M5.4"),

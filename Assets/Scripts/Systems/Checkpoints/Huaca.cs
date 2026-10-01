@@ -27,7 +27,10 @@ namespace Ruminahui
                     if (m != null) { m.Health.ResetFull(); m.Stamina.ResetFull(); }
             CheckpointService.Instance?.SetCheckpoint(transform.position + transform.forward * 2f, transform.rotation);
             AudioPool.Instance?.PlayCue(PlaceholderCue.Pickup, transform.position);
-            ObjectiveTracker.Say("Huaca", "HP restored. Checkpoint set.");
+            ObjectiveTracker.Say("Huaca", "HP restored. Checkpoint set. Progress saved.");
+            var mm = MissionManager.Instance;
+            if (SaveSystem.Instance != null && mm != null && mm.Current != null) SaveSystem.Instance.Save(mm.Current.Id);
+            UpgradeMenuUI.Instance?.Open(true); // approved: the upgrade menu opens from pause and at huacas
         }
     }
 }

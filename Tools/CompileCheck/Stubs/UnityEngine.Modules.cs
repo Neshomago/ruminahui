@@ -92,7 +92,7 @@ namespace UnityEngine
         public Vector3 WorldToScreenPoint(Vector3 position) => position;
     }
 
-    public sealed class AudioListener : Behaviour { }
+    public sealed class AudioListener : Behaviour { public static float volume { get; set; } }
     public enum AudioRolloffMode { Logarithmic, Linear, Custom }
 
     public sealed class AudioClip : Object

@@ -30,6 +30,8 @@ namespace Ruminahui
             if (Current != null)
             {
                 Progression.SetUnlockAll(false);
+                // Opened directly in the editor (nothing played yet): count earlier missions as played so points/unlocks make sense.
+                if (!Progression.CompletedMissions.GetEnumerator().MoveNext()) Progression.CatchUpTo(Current.Id);
                 Progression.ApplyForMission(Current.Id);
                 Debug.Log($"[Mission] {Current.Id} — {Current.Title}");
             }
@@ -54,7 +56,30 @@ namespace Ruminahui
             }
             var next = MissionDatabase.Next(Current.Id);
             Debug.Log($"[Mission] {Current.Id} complete → {(next != null ? next.Id : "end of campaign")}");
+            Progression.MarkCompleted(Current.Id);
+            if (Current.AwardsUpgradePoint) ObjectiveTracker.Say("Upgrades", $"+1 upgrade point ({UpgradeEconomy.AvailablePoints()} available — Esc ▸ Upgrades)");
+            if (SaveSystem.Instance != null) SaveSystem.Instance.Save(next != null ? next.Id : Current.Id);
             StartMission(next != null ? next.Id : MissionDatabase.BootScene);
+        }
+
+        /// <summary>Mission list (chapter select): earlier missions count as played so the economy catches up.</summary>
+        public void StartFromChapterSelect(string id)
+        {
+            if (MissionDatabase.IsMission(id)) Progression.CatchUpTo(id);
+            StartMission(id);
+        }
+
+        public void ContinueFromSave()
+        {
+            var id = SaveSystem.Instance != null ? SaveSystem.Instance.LoadForContinue() : null;
+            if (id != null) StartMission(id);
+        }
+
+        public void NewGame()
+        {
+            if (SaveSystem.Instance != null) SaveSystem.Instance.NewGame();
+            else Progression.ResetAll();
+            StartMission(MissionDatabase.Missions[0].Id);
         }
 
         public void RestartCurrent()

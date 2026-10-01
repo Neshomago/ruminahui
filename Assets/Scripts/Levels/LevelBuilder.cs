@@ -179,8 +179,8 @@ namespace Ruminahui
         {
             Ground(Vector3.zero, new Vector2(30f, 30f));
             Spawn(CharacterId.Ruminahui, Vector3.zero, 0f, true);
-            ObjectiveTracker.Set("Pick a mission or a TEST scene (Esc toggles this menu).");
-            PauseMenu.Instance?.Open(true);
+            ObjectiveTracker.Set("Main menu. Missions lists every mission and TEST scene.");
+            MainMenuUI.Instance?.Open(true);
         }
 
         static void BuildPlaceholderMission(string id)

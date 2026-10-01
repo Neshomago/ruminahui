@@ -20,14 +20,16 @@ namespace Ruminahui
             UIFactory.Stretch(panel);
 
             var col = UIFactory.Node(panel, "Main");
-            UIFactory.Place(col, new Vector2(0.5f, 0.5f), new Vector2(1f, 0.5f), new Vector2(-40f, 0f), new Vector2(320f, 400f));
+            UIFactory.Place(col, new Vector2(0.5f, 0.5f), new Vector2(1f, 0.5f), new Vector2(-40f, 0f), new Vector2(320f, 520f));
             UIFactory.VerticalList(col, 10f, 10);
             var title = UIFactory.Label(col, "Title", "PAUSED", 34, TextAnchor.MiddleCenter, Color.white);
             title.rectTransform.sizeDelta = new Vector2(300f, 50f);
             UIFactory.Button(col, "Resume", () => Open(false), new Vector2(300f, 44f));
+            UIFactory.Button(col, "Upgrades", () => { Open(false); UpgradeMenuUI.Instance?.Open(true); }, new Vector2(300f, 44f));
+            UIFactory.Button(col, "Settings", () => SettingsPanel.Instance?.Open(true), new Vector2(300f, 44f));
             UIFactory.Button(col, "Restart from checkpoint", () => { Open(false); CheckpointService.Instance?.RestartFromCheckpoint(); }, new Vector2(300f, 44f));
             UIFactory.Button(col, "Restart scene", () => { Open(false); MissionManager.Instance?.RestartCurrent(); }, new Vector2(300f, 44f));
-            UIFactory.Button(col, "Boot / mission select", () => { Open(false); MissionManager.Instance?.StartMission(MissionDatabase.BootScene); }, new Vector2(300f, 44f));
+            UIFactory.Button(col, "Main menu", () => { Open(false); MissionManager.Instance?.StartMission(MissionDatabase.BootScene); }, new Vector2(300f, 44f));
 
             missions = UIFactory.Node(panel, "Missions");
             UIFactory.Place(missions, new Vector2(0.5f, 0.5f), new Vector2(0f, 0.5f), new Vector2(0f, 0f), new Vector2(820f, 900f));
@@ -38,7 +40,7 @@ namespace Ruminahui
             {
                 var id = m.Id;
                 string label = $"{m.Id}  {m.Title}" + (m.HasBuiltContent ? "" : "  (placeholder)");
-                UIFactory.Button(missions, label, () => { Open(false); MissionManager.Instance?.StartMission(id); }, new Vector2(400f, 28f));
+                UIFactory.Button(missions, label, () => { Open(false); MissionManager.Instance?.StartFromChapterSelect(id); }, new Vector2(400f, 28f));
             }
             foreach (var t in MissionDatabase.TestScenes)
             {
@@ -64,7 +66,10 @@ namespace Ruminahui
         void Update()
         {
             var input = GameInput.Instance;
-            if (input != null && input.Pause.WasPressedThisFrame()) Open(!open);
+            // Menus stacked on top (upgrades, settings) and the main menu own Esc while open.
+            if ((UpgradeMenuUI.Instance != null && UpgradeMenuUI.Instance.IsOpen) || (SettingsPanel.Instance != null && SettingsPanel.Instance.IsOpen)) return;
+            if (MainMenuUI.Instance != null && MainMenuUI.Instance.IsOpen) return;
+            if (UIEscape.TryConsume(input)) Open(!open);
         }
     }
 }
